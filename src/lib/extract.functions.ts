@@ -35,7 +35,12 @@ Extract every indexable term into these 8 categories. Follow these rules strictl
 7) organisations — Organisations, professions, religions, societies, institutions, companies, ships. Include role/profession nouns (e.g. skinhead, prosecutor, jogger, pilot, victim).
 8) places — Town, county, country, or significant geographical feature. Include compound forms like "Halle, East Germany".
 
-Return ONLY JSON matching the schema. Each array contains short strings. Do not add commentary. If a category has no items, return an empty array.`;
+For EVERY item, also return a confidence rating:
+- "high" — the term is clearly stated on the page, unambiguous, and clearly belongs in this category.
+- "medium" — the term is present but the exact wording, spelling, or category placement is uncertain (e.g. partial OCR, ambiguous role).
+- "low" — the term is inferred, may be an OCR guess, or you are unsure it should be indexed.
+
+Return ONLY JSON matching the schema. Each array contains objects of the form { "text": string, "confidence": "high" | "medium" | "low" }. Do not add commentary. If a category has no items, return an empty array.`;
 
 export const extractKeywords = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => InputSchema.parse(input))
