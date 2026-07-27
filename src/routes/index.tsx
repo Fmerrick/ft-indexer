@@ -2,12 +2,17 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Upload, Loader2, Download, FileText } from "lucide-react";
+import { Upload, Loader2, Download, FileText, Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { extractKeywords, type ExtractionResult } from "@/lib/extract.functions";
+import { cn } from "@/lib/utils";
+import {
+  extractKeywords,
+  type ExtractionResult,
+  type IndexItem,
+  type Confidence,
+} from "@/lib/extract.functions";
 import { buildDocxBlob } from "@/lib/build-docx";
 
 export const Route = createFileRoute("/")({
@@ -45,15 +50,27 @@ const CATEGORIES: Array<{ key: CategoryKey; label: string; hint: string }> = [
   { key: "places", label: "Places", hint: "Town, county, country, features" },
 ];
 
-const EMPTY: ExtractionResult = {
-  people: [],
-  topics: [],
-  science: [],
-  filmsTV: [],
-  letters: [],
-  fictional: [],
-  organisations: [],
-  places: [],
+const CONFIDENCE_ORDER: Confidence[] = ["high", "medium", "low"];
+
+const CONFIDENCE_STYLES: Record<
+  Confidence,
+  { row: string; dot: string; label: string }
+> = {
+  high: {
+    row: "bg-green-500/10 border-green-500/40 focus-within:border-green-500",
+    dot: "bg-green-500",
+    label: "High confidence",
+  },
+  medium: {
+    row: "bg-yellow-400/10 border-yellow-500/40 focus-within:border-yellow-500",
+    dot: "bg-yellow-500",
+    label: "Needs review",
+  },
+  low: {
+    row: "bg-muted border-border focus-within:border-muted-foreground/60",
+    dot: "bg-muted-foreground",
+    label: "Low confidence",
+  },
 };
 
 function fileToBase64(file: File): Promise<string> {
@@ -96,12 +113,8 @@ function IndexerPage() {
     }
   }
 
-  function updateCategory(key: CategoryKey, text: string) {
+  function setCategory(key: CategoryKey, items: IndexItem[]) {
     if (!result) return;
-    const items = text
-      .split("\n")
-      .map((l) => l.replace(/^\s*[-*•]\s*/, "").trim())
-      .filter(Boolean);
     setResult({ ...result, [key]: items });
   }
 
@@ -126,8 +139,9 @@ function IndexerPage() {
             Fortean Times Indexer
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Upload a page PDF. The AI reads the whole page and sorts every indexable
-            term into the eight FT categories. Edit anything, then export as .docx.
+            Upload a page PDF. The AI reads the whole page, sorts every indexable
+            term into the eight FT categories, and marks each with a confidence
+            rating. Edit anything, then export as .docx.
           </p>
         </div>
       </header>
@@ -178,10 +192,22 @@ function IndexerPage() {
 
         {result && (
           <>
-            <div className="flex items-center justify-between">
-              <p className="text-sm text-muted-foreground">
-                Review each list. One item per line. Then download the .docx.
-              </p>
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
+                <span className="font-medium text-foreground">Confidence:</span>
+                {CONFIDENCE_ORDER.map((c) => (
+                  <span key={c} className="flex items-center gap-1.5">
+                    <span
+                      className={cn(
+                        "inline-block h-2.5 w-2.5 rounded-full",
+                        CONFIDENCE_STYLES[c].dot,
+                      )}
+                    />
+                    {CONFIDENCE_STYLES[c].label}
+                  </span>
+                ))}
+                <span className="ml-2">Click the dot to cycle confidence.</span>
+              </div>
               <Button onClick={handleDownload}>
                 <Download className="h-4 w-4" /> Download .docx
               </Button>
@@ -194,7 +220,7 @@ function IndexerPage() {
                   label={cat.label}
                   hint={cat.hint}
                   items={result[cat.key]}
-                  onChange={(text) => updateCategory(cat.key, text)}
+                  onChange={(items) => setCategory(cat.key, items)}
                 />
               ))}
             </div>
@@ -217,6 +243,11 @@ function IndexerPage() {
   );
 }
 
+function nextConfidence(c: Confidence): Confidence {
+  const i = CONFIDENCE_ORDER.indexOf(c);
+  return CONFIDENCE_ORDER[(i + 1) % CONFIDENCE_ORDER.length];
+}
+
 function CategoryCard({
   label,
   hint,
@@ -225,22 +256,100 @@ function CategoryCard({
 }: {
   label: string;
   hint: string;
-  items: string[];
-  onChange: (text: string) => void;
+  items: IndexItem[];
+  onChange: (items: IndexItem[]) => void;
 }) {
+  const counts = items.reduce(
+    (acc, it) => {
+      acc[it.confidence]++;
+      return acc;
+    },
+    { high: 0, medium: 0, low: 0 } as Record<Confidence, number>,
+  );
+
+  function updateAt(i: number, patch: Partial<IndexItem>) {
+    onChange(items.map((it, idx) => (idx === i ? { ...it, ...patch } : it)));
+  }
+  function removeAt(i: number) {
+    onChange(items.filter((_, idx) => idx !== i));
+  }
+  function add() {
+    onChange([...items, { text: "", confidence: "high" }]);
+  }
+
   return (
     <Card className="p-4">
-      <div className="mb-2">
-        <h3 className="text-sm font-semibold">{label}</h3>
-        <p className="text-xs text-muted-foreground">{hint} · {items.length} items</p>
+      <div className="mb-3 flex items-start justify-between gap-2">
+        <div>
+          <h3 className="text-sm font-semibold">{label}</h3>
+          <p className="text-xs text-muted-foreground">
+            {hint} · {items.length} items
+          </p>
+        </div>
+        <div className="flex items-center gap-2 text-[10px] font-medium">
+          <span className="flex items-center gap-1">
+            <span className="inline-block h-2 w-2 rounded-full bg-green-500" />
+            {counts.high}
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="inline-block h-2 w-2 rounded-full bg-yellow-500" />
+            {counts.medium}
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="inline-block h-2 w-2 rounded-full bg-muted-foreground" />
+            {counts.low}
+          </span>
+        </div>
       </div>
-      <Textarea
-        value={items.join("\n")}
-        onChange={(e) => onChange(e.target.value)}
-        rows={Math.max(4, Math.min(items.length + 1, 14))}
-        className="font-mono text-xs"
-        placeholder="One item per line"
-      />
+
+      <ul className="space-y-1.5">
+        {items.map((item, i) => {
+          const styles = CONFIDENCE_STYLES[item.confidence];
+          return (
+            <li
+              key={i}
+              className={cn(
+                "flex items-center gap-2 rounded-md border px-2 py-1 transition-colors",
+                styles.row,
+              )}
+            >
+              <button
+                type="button"
+                title={`${styles.label} — click to change`}
+                onClick={() =>
+                  updateAt(i, { confidence: nextConfidence(item.confidence) })
+                }
+                className={cn(
+                  "h-3 w-3 shrink-0 rounded-full ring-1 ring-inset ring-black/10",
+                  styles.dot,
+                )}
+              />
+              <input
+                value={item.text}
+                onChange={(e) => updateAt(i, { text: e.target.value })}
+                className="flex-1 bg-transparent text-xs font-mono outline-none"
+              />
+              <button
+                type="button"
+                onClick={() => removeAt(i)}
+                className="text-muted-foreground hover:text-foreground"
+                title="Remove"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+
+      <button
+        type="button"
+        onClick={add}
+        className="mt-2 flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+      >
+        <Plus className="h-3.5 w-3.5" /> Add item
+      </button>
     </Card>
   );
 }
+
