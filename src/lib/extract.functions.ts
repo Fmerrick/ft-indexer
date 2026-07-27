@@ -7,7 +7,12 @@ const InputSchema = z.object({
 });
 
 export type Confidence = "high" | "medium" | "low";
-export type IndexItem = { text: string; confidence: Confidence };
+export type IndexItem = {
+  text: string;
+  confidence: Confidence;
+  context: string;
+  reason: string;
+};
 
 export type ExtractionResult = {
   people: IndexItem[];
@@ -19,6 +24,7 @@ export type ExtractionResult = {
   organisations: IndexItem[];
   places: IndexItem[];
 };
+
 
 
 const SYSTEM_PROMPT = `You are an indexing assistant for Fortean Times magazine.
