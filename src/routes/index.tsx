@@ -342,6 +342,48 @@ function CategoryCard({
                 onChange={(e) => updateAt(i, { text: e.target.value })}
                 className="flex-1 bg-transparent text-xs font-mono outline-none"
               />
+              <Dialog>
+                <DialogTrigger asChild>
+                  <button
+                    type="button"
+                    title="Show context from PDF"
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    <Info className="h-3.5 w-3.5" />
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="max-w-lg">
+                  <DialogHeader>
+                    <DialogTitle className="font-mono text-sm">
+                      {item.text || "(empty)"}
+                    </DialogTitle>
+                    <DialogDescription>
+                      Category: <span className="font-medium">{label}</span> · Confidence:{" "}
+                      <span className="font-medium">{item.confidence}</span>
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="space-y-4 text-sm">
+                    <div>
+                      <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">
+                        Context from page
+                      </div>
+                      <blockquote className="border-l-2 border-border pl-3 italic text-foreground/90 whitespace-pre-wrap">
+                        {item.context?.trim()
+                          ? item.context
+                          : "No context captured for this item."}
+                      </blockquote>
+                    </div>
+                    <div>
+                      <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">
+                        Why it was included
+                      </div>
+                      <p className="text-foreground/90 whitespace-pre-wrap">
+                        {item.reason?.trim() || "No reason provided."}
+                      </p>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
               <button
                 type="button"
                 onClick={() => removeAt(i)}
@@ -354,6 +396,7 @@ function CategoryCard({
           );
         })}
       </ul>
+
 
       <button
         type="button"
