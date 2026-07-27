@@ -2,11 +2,20 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Upload, Loader2, Download, FileText, Plus, X } from "lucide-react";
+import { Upload, Loader2, Download, FileText, Plus, X, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
+
 import {
   extractKeywords,
   type ExtractionResult,
@@ -274,8 +283,12 @@ function CategoryCard({
     onChange(items.filter((_, idx) => idx !== i));
   }
   function add() {
-    onChange([...items, { text: "", confidence: "high" }]);
+    onChange([
+      ...items,
+      { text: "", confidence: "high", context: "", reason: "Manually added by editor." },
+    ]);
   }
+
 
   return (
     <Card className="p-4">
@@ -329,6 +342,48 @@ function CategoryCard({
                 onChange={(e) => updateAt(i, { text: e.target.value })}
                 className="flex-1 bg-transparent text-xs font-mono outline-none"
               />
+              <Dialog>
+                <DialogTrigger asChild>
+                  <button
+                    type="button"
+                    title="Show context from PDF"
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    <Info className="h-3.5 w-3.5" />
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="max-w-lg">
+                  <DialogHeader>
+                    <DialogTitle className="font-mono text-sm">
+                      {item.text || "(empty)"}
+                    </DialogTitle>
+                    <DialogDescription>
+                      Category: <span className="font-medium">{label}</span> · Confidence:{" "}
+                      <span className="font-medium">{item.confidence}</span>
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="space-y-4 text-sm">
+                    <div>
+                      <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">
+                        Context from page
+                      </div>
+                      <blockquote className="border-l-2 border-border pl-3 italic text-foreground/90 whitespace-pre-wrap">
+                        {item.context?.trim()
+                          ? item.context
+                          : "No context captured for this item."}
+                      </blockquote>
+                    </div>
+                    <div>
+                      <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">
+                        Why it was included
+                      </div>
+                      <p className="text-foreground/90 whitespace-pre-wrap">
+                        {item.reason?.trim() || "No reason provided."}
+                      </p>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
               <button
                 type="button"
                 onClick={() => removeAt(i)}
@@ -341,6 +396,7 @@ function CategoryCard({
           );
         })}
       </ul>
+
 
       <button
         type="button"
