@@ -92,8 +92,11 @@ export const extractKeywords = createServerFn({ method: "POST" })
                 properties: {
                   text: { type: "string" },
                   confidence: { type: "string", enum: ["high", "medium", "low"] },
+                  context: { type: "string" },
+                  reason: { type: "string" },
                 },
-                required: ["text", "confidence"],
+                required: ["text", "confidence", "context", "reason"],
+
               },
             };
             return {
