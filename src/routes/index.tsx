@@ -283,8 +283,12 @@ function CategoryCard({
     onChange(items.filter((_, idx) => idx !== i));
   }
   function add() {
-    onChange([...items, { text: "", confidence: "high" }]);
+    onChange([
+      ...items,
+      { text: "", confidence: "high", context: "", reason: "Manually added by editor." },
+    ]);
   }
+
 
   return (
     <Card className="p-4">
