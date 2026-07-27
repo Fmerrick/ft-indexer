@@ -6,16 +6,20 @@ const InputSchema = z.object({
   dataBase64: z.string().min(10),
 });
 
+export type Confidence = "high" | "medium" | "low";
+export type IndexItem = { text: string; confidence: Confidence };
+
 export type ExtractionResult = {
-  people: string[];
-  topics: string[];
-  science: string[];
-  filmsTV: string[];
-  letters: string[];
-  fictional: string[];
-  organisations: string[];
-  places: string[];
+  people: IndexItem[];
+  topics: IndexItem[];
+  science: IndexItem[];
+  filmsTV: IndexItem[];
+  letters: IndexItem[];
+  fictional: IndexItem[];
+  organisations: IndexItem[];
+  places: IndexItem[];
 };
+
 
 const SYSTEM_PROMPT = `You are an indexing assistant for Fortean Times magazine.
 The user will send you one page (a PDF). Read the ENTIRE page including all articles, headlines, captions, "Extra! Extra!" newspaper headline lists, and picture captions.
@@ -31,7 +35,12 @@ Extract every indexable term into these 8 categories. Follow these rules strictl
 7) organisations — Organisations, professions, religions, societies, institutions, companies, ships. Include role/profession nouns (e.g. skinhead, prosecutor, jogger, pilot, victim).
 8) places — Town, county, country, or significant geographical feature. Include compound forms like "Halle, East Germany".
 
-Return ONLY JSON matching the schema. Each array contains short strings. Do not add commentary. If a category has no items, return an empty array.`;
+For EVERY item, also return a confidence rating:
+- "high" — the term is clearly stated on the page, unambiguous, and clearly belongs in this category.
+- "medium" — the term is present but the exact wording, spelling, or category placement is uncertain (e.g. partial OCR, ambiguous role).
+- "low" — the term is inferred, may be an OCR guess, or you are unsure it should be indexed.
+
+Return ONLY JSON matching the schema. Each array contains objects of the form { "text": string, "confidence": "high" | "medium" | "low" }. Do not add commentary. If a category has no items, return an empty array.`;
 
 export const extractKeywords = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => InputSchema.parse(input))
@@ -64,30 +73,44 @@ export const extractKeywords = createServerFn({ method: "POST" })
         json_schema: {
           name: "ft_index",
           strict: true,
-          schema: {
-            type: "object",
-            additionalProperties: false,
-            properties: {
-              people: { type: "array", items: { type: "string" } },
-              topics: { type: "array", items: { type: "string" } },
-              science: { type: "array", items: { type: "string" } },
-              filmsTV: { type: "array", items: { type: "string" } },
-              letters: { type: "array", items: { type: "string" } },
-              fictional: { type: "array", items: { type: "string" } },
-              organisations: { type: "array", items: { type: "string" } },
-              places: { type: "array", items: { type: "string" } },
-            },
-            required: [
-              "people",
-              "topics",
-              "science",
-              "filmsTV",
-              "letters",
-              "fictional",
-              "organisations",
-              "places",
-            ],
-          },
+          schema: (() => {
+            const itemSchema = {
+              type: "array",
+              items: {
+                type: "object",
+                additionalProperties: false,
+                properties: {
+                  text: { type: "string" },
+                  confidence: { type: "string", enum: ["high", "medium", "low"] },
+                },
+                required: ["text", "confidence"],
+              },
+            };
+            return {
+              type: "object",
+              additionalProperties: false,
+              properties: {
+                people: itemSchema,
+                topics: itemSchema,
+                science: itemSchema,
+                filmsTV: itemSchema,
+                letters: itemSchema,
+                fictional: itemSchema,
+                organisations: itemSchema,
+                places: itemSchema,
+              },
+              required: [
+                "people",
+                "topics",
+                "science",
+                "filmsTV",
+                "letters",
+                "fictional",
+                "organisations",
+                "places",
+              ],
+            };
+          })(),
         },
       },
     };
