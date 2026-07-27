@@ -76,7 +76,7 @@ export async function buildDocxBlob(
         children.push(
           new Paragraph({
             bullet: { level: 0 },
-            children: [new TextRun(item)],
+            children: [new TextRun(item.text)],
           }),
         );
       }
