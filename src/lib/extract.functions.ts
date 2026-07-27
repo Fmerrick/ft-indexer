@@ -73,30 +73,44 @@ export const extractKeywords = createServerFn({ method: "POST" })
         json_schema: {
           name: "ft_index",
           strict: true,
-          schema: {
-            type: "object",
-            additionalProperties: false,
-            properties: {
-              people: { type: "array", items: { type: "string" } },
-              topics: { type: "array", items: { type: "string" } },
-              science: { type: "array", items: { type: "string" } },
-              filmsTV: { type: "array", items: { type: "string" } },
-              letters: { type: "array", items: { type: "string" } },
-              fictional: { type: "array", items: { type: "string" } },
-              organisations: { type: "array", items: { type: "string" } },
-              places: { type: "array", items: { type: "string" } },
-            },
-            required: [
-              "people",
-              "topics",
-              "science",
-              "filmsTV",
-              "letters",
-              "fictional",
-              "organisations",
-              "places",
-            ],
-          },
+          schema: (() => {
+            const itemSchema = {
+              type: "array",
+              items: {
+                type: "object",
+                additionalProperties: false,
+                properties: {
+                  text: { type: "string" },
+                  confidence: { type: "string", enum: ["high", "medium", "low"] },
+                },
+                required: ["text", "confidence"],
+              },
+            };
+            return {
+              type: "object",
+              additionalProperties: false,
+              properties: {
+                people: itemSchema,
+                topics: itemSchema,
+                science: itemSchema,
+                filmsTV: itemSchema,
+                letters: itemSchema,
+                fictional: itemSchema,
+                organisations: itemSchema,
+                places: itemSchema,
+              },
+              required: [
+                "people",
+                "topics",
+                "science",
+                "filmsTV",
+                "letters",
+                "fictional",
+                "organisations",
+                "places",
+              ],
+            };
+          })(),
         },
       },
     };
