@@ -6,16 +6,20 @@ const InputSchema = z.object({
   dataBase64: z.string().min(10),
 });
 
+export type Confidence = "high" | "medium" | "low";
+export type IndexItem = { text: string; confidence: Confidence };
+
 export type ExtractionResult = {
-  people: string[];
-  topics: string[];
-  science: string[];
-  filmsTV: string[];
-  letters: string[];
-  fictional: string[];
-  organisations: string[];
-  places: string[];
+  people: IndexItem[];
+  topics: IndexItem[];
+  science: IndexItem[];
+  filmsTV: IndexItem[];
+  letters: IndexItem[];
+  fictional: IndexItem[];
+  organisations: IndexItem[];
+  places: IndexItem[];
 };
+
 
 const SYSTEM_PROMPT = `You are an indexing assistant for Fortean Times magazine.
 The user will send you one page (a PDF). Read the ENTIRE page including all articles, headlines, captions, "Extra! Extra!" newspaper headline lists, and picture captions.
