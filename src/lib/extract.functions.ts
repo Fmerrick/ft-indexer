@@ -41,12 +41,16 @@ Extract every indexable term into these 8 categories. Follow these rules strictl
 7) organisations — Organisations, professions, religions, societies, institutions, companies, ships. Include role/profession nouns (e.g. skinhead, prosecutor, jogger, pilot, victim).
 8) places — Town, county, country, or significant geographical feature. Include compound forms like "Halle, East Germany".
 
-For EVERY item, also return a confidence rating:
-- "high" — the term is clearly stated on the page, unambiguous, and clearly belongs in this category.
-- "medium" — the term is present but the exact wording, spelling, or category placement is uncertain (e.g. partial OCR, ambiguous role).
-- "low" — the term is inferred, may be an OCR guess, or you are unsure it should be indexed.
+For EVERY item, also return:
+- confidence: "high" | "medium" | "low"
+  - "high" — clearly stated on the page, unambiguous, clearly belongs in this category.
+  - "medium" — present but wording/spelling/category placement is uncertain.
+  - "low" — inferred or possibly an OCR guess.
+- context: the exact sentence or short paragraph from the page where the term appears (verbatim quote, 1–3 sentences). If the term is only in a caption/headline list, quote that caption or headline. Keep under 400 characters.
+- reason: a brief (1–2 sentence) explanation of why you placed this term in this specific category, so a human editor can quickly judge inclusion.
 
-Return ONLY JSON matching the schema. Each array contains objects of the form { "text": string, "confidence": "high" | "medium" | "low" }. Do not add commentary. If a category has no items, return an empty array.`;
+Return ONLY JSON matching the schema. Each array contains objects of the form { "text": string, "confidence": "high" | "medium" | "low", "context": string, "reason": string }. Do not add commentary. If a category has no items, return an empty array.`;
+
 
 export const extractKeywords = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => InputSchema.parse(input))
