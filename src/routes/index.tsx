@@ -145,7 +145,7 @@ function IndexerPage() {
       <header className="border-b border-border">
         <div className="mx-auto max-w-6xl px-6 py-8">
           <h1 className="text-3xl font-semibold tracking-tight">
-            Fortean Times Indexer
+            Fortean Times Indexing Assistant
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
             Upload a page PDF. The AI reads the whole page, sorts every indexable
