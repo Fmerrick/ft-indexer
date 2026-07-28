@@ -234,7 +234,7 @@ function IndexerPage() {
           <img
             src={ftLogoAsset.url}
             alt="FT Indexing Assistant logo"
-            className="mx-auto mb-4 h-48 w-auto rounded-full"
+            className="mx-auto mb-4 h-48 w-auto"
           />
           <h1 className="text-3xl font-semibold tracking-tight">
             Fortean Times Indexing Assistant
