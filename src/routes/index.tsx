@@ -369,6 +369,9 @@ function IndexerPage() {
                   hint={cat.hint}
                   items={result[cat.key]}
                   onChange={(items) => setCategory(cat.key, items)}
+                  onCommit={(before, after) =>
+                    recordCategoryChange(cat.key, before, after)
+                  }
                 />
               ))}
             </div>
