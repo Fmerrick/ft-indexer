@@ -34,6 +34,7 @@ import {
   newId,
   saveAskWhy,
   saveFeedback,
+  uploadFeedback,
   type FeedbackEvent,
 } from "@/lib/feedback";
 import ftLogoAsset from "@/assets/FT_Indexing_Assistant_Image_r1.png.asset.json";
@@ -140,27 +141,34 @@ function IndexerPage() {
       timestamp: new Date().toISOString(),
     };
     if (askWhy) {
-      // Store immediately (without reason) so nothing is lost if the user closes the tab.
+      // Store locally immediately; upload happens once the reason step is
+      // resolved (save or skip) so the row reaches the backend with the
+      // final reason attached.
       persistFeedback([...feedback, event]);
       setPendingEvent(event);
       setReasonDraft("");
     } else {
       persistFeedback([...feedback, event]);
+      void uploadFeedback(event);
     }
   }
 
   function handleReasonSave() {
     if (!pendingEvent) return;
     const reason = reasonDraft.trim();
-    const next = feedback.map((e) =>
-      e.id === pendingEvent.id ? { ...e, reason: reason || undefined } : e,
-    );
+    const updated: FeedbackEvent = {
+      ...pendingEvent,
+      reason: reason || undefined,
+    };
+    const next = feedback.map((e) => (e.id === pendingEvent.id ? updated : e));
     persistFeedback(next);
+    void uploadFeedback(updated);
     setPendingEvent(null);
     setReasonDraft("");
   }
 
   function handleReasonSkip() {
+    if (pendingEvent) void uploadFeedback(pendingEvent);
     setPendingEvent(null);
     setReasonDraft("");
   }
@@ -268,9 +276,9 @@ function IndexerPage() {
             <label htmlFor="ask-why" className="text-sm cursor-pointer">
               <span className="font-medium">Ask "why" for each change</span>
               <span className="ml-2 text-muted-foreground">
-                All edits are recorded automatically to help me learn, but
-                asking "why" helps me learn more. When on, you'll be asked for a
-                brief reason (with a Skip option).
+                Every change is uploaded automatically to help me learn. Turn
+                on "why" to add a brief reason to each change (with a Skip
+                option). You can still export or clear your local log below.
               </span>
             </label>
           </div>

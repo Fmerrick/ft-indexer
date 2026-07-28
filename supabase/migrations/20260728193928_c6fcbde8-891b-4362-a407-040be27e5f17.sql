@@ -1,0 +1,1 @@
+ALTER TABLE public.feedback_events ADD CONSTRAINT feedback_events_client_event_id_key UNIQUE (client_event_id);
