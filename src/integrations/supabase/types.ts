@@ -14,7 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      feedback_events: {
+        Row: {
+          action: string
+          after_item: Json | null
+          before_item: Json | null
+          category: string
+          client_event_id: string | null
+          client_timestamp: string | null
+          created_at: string
+          id: string
+          page_label: string | null
+          reason: string | null
+        }
+        Insert: {
+          action: string
+          after_item?: Json | null
+          before_item?: Json | null
+          category: string
+          client_event_id?: string | null
+          client_timestamp?: string | null
+          created_at?: string
+          id?: string
+          page_label?: string | null
+          reason?: string | null
+        }
+        Update: {
+          action?: string
+          after_item?: Json | null
+          before_item?: Json | null
+          category?: string
+          client_event_id?: string | null
+          client_timestamp?: string | null
+          created_at?: string
+          id?: string
+          page_label?: string | null
+          reason?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
