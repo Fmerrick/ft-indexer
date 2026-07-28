@@ -276,9 +276,9 @@ function IndexerPage() {
             <label htmlFor="ask-why" className="text-sm cursor-pointer">
               <span className="font-medium">Ask "why" for each change</span>
               <span className="ml-2 text-muted-foreground">
-                All edits are recorded automatically to help me learn, but
-                asking "why" helps me learn more. When on, you'll be asked for a
-                brief reason (with a Skip option).
+                Every change is uploaded automatically to help me learn. Turn
+                on "why" to add a brief reason to each change (with a Skip
+                option). You can still export or clear your local log below.
               </span>
             </label>
           </div>
