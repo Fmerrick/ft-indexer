@@ -106,3 +106,30 @@ export function newId(): string {
 }
 
 export type { Confidence };
+
+import { supabase } from "@/integrations/supabase/client";
+
+/**
+ * Upsert a feedback event to the backend. Fire-and-forget; failures are
+ * logged but never surfaced to the editor (the local log is authoritative).
+ */
+export async function uploadFeedback(event: FeedbackEvent): Promise<void> {
+  try {
+    const { error } = await supabase.from("feedback_events" as never).upsert(
+      {
+        client_event_id: event.id,
+        page_label: event.pageLabel,
+        category: event.category,
+        action: event.action,
+        before_item: (event.before ?? null) as never,
+        after_item: (event.after ?? null) as never,
+        reason: event.reason ?? null,
+        client_timestamp: event.timestamp,
+      } as never,
+      { onConflict: "client_event_id" } as never,
+    );
+    if (error) console.warn("[feedback] upload failed:", error.message);
+  } catch (err) {
+    console.warn("[feedback] upload error:", err);
+  }
+}
