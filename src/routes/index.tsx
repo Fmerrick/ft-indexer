@@ -27,13 +27,13 @@ import { buildDocxBlob } from "@/lib/build-docx";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Fortean Times Indexer — Keyword Extractor" },
+      { title: "Fortean Times Indexing Assistant — Keyword Extractor" },
       {
         name: "description",
         content:
           "Upload a Fortean Times page PDF and generate a keyword index sorted into the eight FT indexing categories.",
       },
-      { property: "og:title", content: "Fortean Times Indexer" },
+      { property: "og:title", content: "Fortean Times Indexing Assistant" },
       {
         property: "og:description",
         content:
