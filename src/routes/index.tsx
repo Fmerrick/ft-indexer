@@ -36,7 +36,7 @@ import {
   saveFeedback,
   type FeedbackEvent,
 } from "@/lib/feedback";
-import ftLogoAsset from "@/assets/FT_Indexing_Assistant_Image.png.asset.json";
+import ftLogoAsset from "@/assets/FT_Indexing_Assistant_Image_r1.png.asset.json";
 
 
 export const Route = createFileRoute("/")({
