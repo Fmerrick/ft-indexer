@@ -23,6 +23,8 @@ import {
   type Confidence,
 } from "@/lib/extract.functions";
 import { buildDocxBlob } from "@/lib/build-docx";
+import ftLogoAsset from "@/assets/FT_Indexing_Assistant_Image.png.asset.json";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
