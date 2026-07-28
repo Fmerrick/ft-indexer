@@ -505,8 +505,60 @@ function CategoryCard({
     onCommit(before, items);
   }
 
+  return (
+    <Card className="p-4">
+      <div className="mb-3 flex items-start justify-between gap-2">
+        <div>
+          <h3 className="text-sm font-semibold">{label}</h3>
+          <p className="text-xs text-muted-foreground">
+            {hint} · {items.length} items
+          </p>
+        </div>
+        <div className="flex items-center gap-2 text-[10px] font-medium">
+          <span className="flex items-center gap-1">
+            <span className="inline-block h-2 w-2 rounded-full bg-green-500" />
+            {counts.high}
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="inline-block h-2 w-2 rounded-full bg-yellow-500" />
+            {counts.medium}
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="inline-block h-2 w-2 rounded-full bg-muted-foreground" />
+            {counts.low}
+          </span>
+        </div>
+      </div>
 
+      <ul className="space-y-1.5">
+        {items.map((item, i) => {
+          const styles = CONFIDENCE_STYLES[item.confidence];
+          return (
+            <li
+              key={i}
+              className={cn(
+                "flex items-center gap-2 rounded-md border px-2 py-1 transition-colors",
+                styles.row,
+              )}
+            >
+              <button
+                type="button"
+                title={`${styles.label} — click to change`}
+                onClick={() => changeConfidenceAt(i)}
+                className={cn(
+                  "h-3 w-3 shrink-0 rounded-full ring-1 ring-inset ring-black/10",
+                  styles.dot,
+                )}
+              />
+              <input
+                value={item.text}
+                onChange={(e) => updateAt(i, { text: e.target.value })}
+                onFocus={handleTextFocus}
+                onBlur={() => handleTextBlur(i)}
+                className="flex-1 bg-transparent text-xs font-mono outline-none"
+              />
               <Dialog>
+
                 <DialogTrigger asChild>
                   <button
                     type="button"
