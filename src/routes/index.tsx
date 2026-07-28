@@ -27,13 +27,13 @@ import { buildDocxBlob } from "@/lib/build-docx";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Fortean Times Indexer — Keyword Extractor" },
+      { title: "Fortean Times Indexing Assistant — Keyword Extractor" },
       {
         name: "description",
         content:
           "Upload a Fortean Times page PDF and generate a keyword index sorted into the eight FT indexing categories.",
       },
-      { property: "og:title", content: "Fortean Times Indexer" },
+      { property: "og:title", content: "Fortean Times Indexing Assistant" },
       {
         property: "og:description",
         content:
@@ -145,7 +145,7 @@ function IndexerPage() {
       <header className="border-b border-border">
         <div className="mx-auto max-w-6xl px-6 py-8">
           <h1 className="text-3xl font-semibold tracking-tight">
-            Fortean Times Indexer
+            Fortean Times Indexing Assistant
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
             Upload a page PDF. The AI reads the whole page, sorts every indexable
