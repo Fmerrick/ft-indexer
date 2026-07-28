@@ -220,26 +220,6 @@ function IndexerPage() {
     URL.revokeObjectURL(url);
   }
 
-  function handleDownloadFeedback() {
-    const blob = new Blob([JSON.stringify(feedback, null, 2)], {
-      type: "application/json",
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `ft-indexer-feedback-${new Date().toISOString().slice(0, 10)}.json`;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-  }
-
-  function handleClearFeedback() {
-    if (feedback.length === 0) return;
-    if (!window.confirm(`Clear ${feedback.length} feedback entries?`)) return;
-    persistFeedback([]);
-    toast.success("Feedback log cleared");
-  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -263,7 +243,7 @@ function IndexerPage() {
 
 
       <main className="mx-auto max-w-6xl px-6 py-8 space-y-6">
-        <Card className="p-4 flex flex-wrap items-center justify-between gap-4">
+        <Card className="p-4 flex flex-wrap items-center gap-4">
           <div className="flex items-center gap-3">
             <Switch
               id="ask-why"
@@ -278,28 +258,9 @@ function IndexerPage() {
               <span className="ml-2 text-muted-foreground">
                 Every change is uploaded automatically to help me learn. Turn
                 on "why" to add a brief reason to each change (with a Skip
-                option). You can still export or clear your local log below.
+                option).
               </span>
             </label>
-          </div>
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <span>{feedback.length} feedback entries</span>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleDownloadFeedback}
-              disabled={feedback.length === 0}
-            >
-              <Download className="h-3.5 w-3.5" /> Export log
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleClearFeedback}
-              disabled={feedback.length === 0}
-            >
-              Clear
-            </Button>
           </div>
         </Card>
 
