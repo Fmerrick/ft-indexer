@@ -34,6 +34,7 @@ import {
   newId,
   saveAskWhy,
   saveFeedback,
+  uploadFeedback,
   type FeedbackEvent,
 } from "@/lib/feedback";
 import ftLogoAsset from "@/assets/FT_Indexing_Assistant_Image_r1.png.asset.json";
