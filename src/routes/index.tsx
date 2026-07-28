@@ -145,7 +145,12 @@ function IndexerPage() {
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b border-border">
-        <div className="mx-auto max-w-6xl px-6 py-8">
+        <div className="mx-auto max-w-6xl px-6 py-8 text-center">
+          <img
+            src={ftLogoAsset.url}
+            alt="FT Indexing Assistant logo"
+            className="mx-auto mb-4 h-32 w-auto rounded-full"
+          />
           <h1 className="text-3xl font-semibold tracking-tight">
             Fortean Times Indexing Assistant
           </h1>
@@ -156,6 +161,7 @@ function IndexerPage() {
           </p>
         </div>
       </header>
+
 
       <main className="mx-auto max-w-6xl px-6 py-8 space-y-6">
         <Card className="p-6">
