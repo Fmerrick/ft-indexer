@@ -187,9 +187,15 @@ function IndexerPage() {
 
   function setCategory(key: CategoryKey, items: IndexItem[]) {
     if (!result) return;
-    const before = result[key];
-    const diff = diffCategory(key, pageLabel || file?.name || "unknown", before, items);
     setResult({ ...result, [key]: items });
+  }
+
+  function recordCategoryChange(
+    key: CategoryKey,
+    before: IndexItem[],
+    after: IndexItem[],
+  ) {
+    const diff = diffCategory(key, pageLabel || file?.name || "unknown", before, after);
     if (diff) recordEvent(diff);
   }
 
