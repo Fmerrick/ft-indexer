@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Upload, Loader2, Download, FileText, Plus, X, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -187,9 +187,15 @@ function IndexerPage() {
 
   function setCategory(key: CategoryKey, items: IndexItem[]) {
     if (!result) return;
-    const before = result[key];
-    const diff = diffCategory(key, pageLabel || file?.name || "unknown", before, items);
     setResult({ ...result, [key]: items });
+  }
+
+  function recordCategoryChange(
+    key: CategoryKey,
+    before: IndexItem[],
+    after: IndexItem[],
+  ) {
+    const diff = diffCategory(key, pageLabel || file?.name || "unknown", before, after);
     if (diff) recordEvent(diff);
   }
 
@@ -363,6 +369,9 @@ function IndexerPage() {
                   hint={cat.hint}
                   items={result[cat.key]}
                   onChange={(items) => setCategory(cat.key, items)}
+                  onCommit={(before, after) =>
+                    recordCategoryChange(cat.key, before, after)
+                  }
                 />
               ))}
             </div>
@@ -430,12 +439,18 @@ function CategoryCard({
   hint,
   items,
   onChange,
+  onCommit,
 }: {
   label: string;
   hint: string;
   items: IndexItem[];
   onChange: (items: IndexItem[]) => void;
+  onCommit: (before: IndexItem[], after: IndexItem[]) => void;
 }) {
+  // Snapshot of items when the currently-focused text input received focus.
+  // Used to defer feedback recording until the edit is committed (blur).
+  const editSnapshotRef = useRef<IndexItem[] | null>(null);
+
   const counts = items.reduce(
     (acc, it) => {
       acc[it.confidence]++;
@@ -448,15 +463,47 @@ function CategoryCard({
     onChange(items.map((it, idx) => (idx === i ? { ...it, ...patch } : it)));
   }
   function removeAt(i: number) {
-    onChange(items.filter((_, idx) => idx !== i));
+    const before = items;
+    const after = items.filter((_, idx) => idx !== i);
+    onChange(after);
+    onCommit(before, after);
+  }
+  function changeConfidenceAt(i: number) {
+    const before = items;
+    const after = items.map((it, idx) =>
+      idx === i ? { ...it, confidence: nextConfidence(it.confidence) } : it,
+    );
+    onChange(after);
+    onCommit(before, after);
   }
   function add() {
+    // Just add the row; commit happens on blur if the user actually typed something.
     onChange([
       ...items,
       { text: "", confidence: "high", context: "", reason: "Manually added by editor." },
     ]);
   }
 
+  function handleTextFocus() {
+    editSnapshotRef.current = items;
+  }
+  function handleTextBlur(i: number) {
+    const before = editSnapshotRef.current;
+    editSnapshotRef.current = null;
+    if (!before) return;
+    const current = items[i];
+    // Skip empty adds (user clicked Add then blurred without typing).
+    if (!current || !current.text.trim()) {
+      // If this was a newly added empty row, silently drop it from state.
+      if (before.length < items.length && !current?.text.trim()) {
+        onChange(items.filter((_, idx) => idx !== i));
+      }
+      return;
+    }
+    const beforeItem = before[i];
+    if (beforeItem && beforeItem.text === current.text) return;
+    onCommit(before, items);
+  }
 
   return (
     <Card className="p-4">
@@ -497,9 +544,7 @@ function CategoryCard({
               <button
                 type="button"
                 title={`${styles.label} — click to change`}
-                onClick={() =>
-                  updateAt(i, { confidence: nextConfidence(item.confidence) })
-                }
+                onClick={() => changeConfidenceAt(i)}
                 className={cn(
                   "h-3 w-3 shrink-0 rounded-full ring-1 ring-inset ring-black/10",
                   styles.dot,
@@ -508,9 +553,12 @@ function CategoryCard({
               <input
                 value={item.text}
                 onChange={(e) => updateAt(i, { text: e.target.value })}
+                onFocus={handleTextFocus}
+                onBlur={() => handleTextBlur(i)}
                 className="flex-1 bg-transparent text-xs font-mono outline-none"
               />
               <Dialog>
+
                 <DialogTrigger asChild>
                   <button
                     type="button"
