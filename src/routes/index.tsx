@@ -1,11 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Upload, Loader2, Download, FileText, Plus, X, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Dialog,
   DialogContent,
@@ -13,6 +15,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogTrigger,
+  DialogFooter,
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 
@@ -23,6 +26,16 @@ import {
   type Confidence,
 } from "@/lib/extract.functions";
 import { buildDocxBlob } from "@/lib/build-docx";
+import {
+  diffCategory,
+  describeEvent,
+  loadAskWhy,
+  loadFeedback,
+  newId,
+  saveAskWhy,
+  saveFeedback,
+  type FeedbackEvent,
+} from "@/lib/feedback";
 import ftLogoAsset from "@/assets/FT_Indexing_Assistant_Image.png.asset.json";
 
 
@@ -104,6 +117,54 @@ function IndexerPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<ExtractionResult | null>(null);
 
+  const [askWhy, setAskWhy] = useState(false);
+  const [feedback, setFeedback] = useState<FeedbackEvent[]>([]);
+  const [pendingEvent, setPendingEvent] = useState<FeedbackEvent | null>(null);
+  const [reasonDraft, setReasonDraft] = useState("");
+
+  // Load persisted feedback + toggle on mount
+  useEffect(() => {
+    setAskWhy(loadAskWhy());
+    setFeedback(loadFeedback());
+  }, []);
+
+  function persistFeedback(next: FeedbackEvent[]) {
+    setFeedback(next);
+    saveFeedback(next);
+  }
+
+  function recordEvent(base: Omit<FeedbackEvent, "id" | "timestamp" | "reason">) {
+    const event: FeedbackEvent = {
+      ...base,
+      id: newId(),
+      timestamp: new Date().toISOString(),
+    };
+    if (askWhy) {
+      // Store immediately (without reason) so nothing is lost if the user closes the tab.
+      persistFeedback([...feedback, event]);
+      setPendingEvent(event);
+      setReasonDraft("");
+    } else {
+      persistFeedback([...feedback, event]);
+    }
+  }
+
+  function handleReasonSave() {
+    if (!pendingEvent) return;
+    const reason = reasonDraft.trim();
+    const next = feedback.map((e) =>
+      e.id === pendingEvent.id ? { ...e, reason: reason || undefined } : e,
+    );
+    persistFeedback(next);
+    setPendingEvent(null);
+    setReasonDraft("");
+  }
+
+  function handleReasonSkip() {
+    setPendingEvent(null);
+    setReasonDraft("");
+  }
+
   async function handleExtract() {
     if (!file) {
       toast.error("Choose a PDF first");
@@ -126,7 +187,10 @@ function IndexerPage() {
 
   function setCategory(key: CategoryKey, items: IndexItem[]) {
     if (!result) return;
+    const before = result[key];
+    const diff = diffCategory(key, pageLabel || file?.name || "unknown", before, items);
     setResult({ ...result, [key]: items });
+    if (diff) recordEvent(diff);
   }
 
   async function handleDownload() {
@@ -140,6 +204,27 @@ function IndexerPage() {
     a.click();
     a.remove();
     URL.revokeObjectURL(url);
+  }
+
+  function handleDownloadFeedback() {
+    const blob = new Blob([JSON.stringify(feedback, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `ft-indexer-feedback-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function handleClearFeedback() {
+    if (feedback.length === 0) return;
+    if (!window.confirm(`Clear ${feedback.length} feedback entries?`)) return;
+    persistFeedback([]);
+    toast.success("Feedback log cleared");
   }
 
   return (
@@ -164,6 +249,45 @@ function IndexerPage() {
 
 
       <main className="mx-auto max-w-6xl px-6 py-8 space-y-6">
+        <Card className="p-4 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <Switch
+              id="ask-why"
+              checked={askWhy}
+              onCheckedChange={(v) => {
+                setAskWhy(v);
+                saveAskWhy(v);
+              }}
+            />
+            <label htmlFor="ask-why" className="text-sm cursor-pointer">
+              <span className="font-medium">Ask "why" for each change</span>
+              <span className="ml-2 text-muted-foreground">
+                All edits are recorded automatically. When on, you'll be asked
+                for a brief reason (with a Skip option).
+              </span>
+            </label>
+          </div>
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <span>{feedback.length} feedback entries</span>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleDownloadFeedback}
+              disabled={feedback.length === 0}
+            >
+              <Download className="h-3.5 w-3.5" /> Export log
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleClearFeedback}
+              disabled={feedback.length === 0}
+            >
+              Clear
+            </Button>
+          </div>
+        </Card>
+
         <Card className="p-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
             <div className="flex-1">
@@ -256,6 +380,41 @@ function IndexerPage() {
           </Card>
         )}
       </main>
+
+      <Dialog
+        open={!!pendingEvent}
+        onOpenChange={(open) => {
+          if (!open) handleReasonSkip();
+        }}
+      >
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle>Why did you make this change?</DialogTitle>
+            <DialogDescription>
+              {pendingEvent ? describeEvent(pendingEvent) : ""}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-2">
+            <Textarea
+              autoFocus
+              placeholder="e.g. wrong category, not indexable, OCR misread, duplicate…"
+              value={reasonDraft}
+              onChange={(e) => setReasonDraft(e.target.value)}
+              rows={3}
+            />
+            <p className="text-xs text-muted-foreground">
+              The change is already saved. This note just helps improve future
+              extractions.
+            </p>
+          </div>
+          <DialogFooter className="gap-2 sm:gap-2">
+            <Button variant="ghost" onClick={handleReasonSkip}>
+              Skip
+            </Button>
+            <Button onClick={handleReasonSave}>Save reason</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
@@ -416,4 +575,3 @@ function CategoryCard({
     </Card>
   );
 }
-
