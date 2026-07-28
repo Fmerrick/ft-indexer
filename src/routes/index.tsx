@@ -141,27 +141,34 @@ function IndexerPage() {
       timestamp: new Date().toISOString(),
     };
     if (askWhy) {
-      // Store immediately (without reason) so nothing is lost if the user closes the tab.
+      // Store locally immediately; upload happens once the reason step is
+      // resolved (save or skip) so the row reaches the backend with the
+      // final reason attached.
       persistFeedback([...feedback, event]);
       setPendingEvent(event);
       setReasonDraft("");
     } else {
       persistFeedback([...feedback, event]);
+      void uploadFeedback(event);
     }
   }
 
   function handleReasonSave() {
     if (!pendingEvent) return;
     const reason = reasonDraft.trim();
-    const next = feedback.map((e) =>
-      e.id === pendingEvent.id ? { ...e, reason: reason || undefined } : e,
-    );
+    const updated: FeedbackEvent = {
+      ...pendingEvent,
+      reason: reason || undefined,
+    };
+    const next = feedback.map((e) => (e.id === pendingEvent.id ? updated : e));
     persistFeedback(next);
+    void uploadFeedback(updated);
     setPendingEvent(null);
     setReasonDraft("");
   }
 
   function handleReasonSkip() {
+    if (pendingEvent) void uploadFeedback(pendingEvent);
     setPendingEvent(null);
     setReasonDraft("");
   }
