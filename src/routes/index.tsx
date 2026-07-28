@@ -439,12 +439,18 @@ function CategoryCard({
   hint,
   items,
   onChange,
+  onCommit,
 }: {
   label: string;
   hint: string;
   items: IndexItem[];
   onChange: (items: IndexItem[]) => void;
+  onCommit: (before: IndexItem[], after: IndexItem[]) => void;
 }) {
+  // Snapshot of items when the currently-focused text input received focus.
+  // Used to defer feedback recording until the edit is committed (blur).
+  const editSnapshotRef = useRef<IndexItem[] | null>(null);
+
   const counts = items.reduce(
     (acc, it) => {
       acc[it.confidence]++;
@@ -457,68 +463,49 @@ function CategoryCard({
     onChange(items.map((it, idx) => (idx === i ? { ...it, ...patch } : it)));
   }
   function removeAt(i: number) {
-    onChange(items.filter((_, idx) => idx !== i));
+    const before = items;
+    const after = items.filter((_, idx) => idx !== i);
+    onChange(after);
+    onCommit(before, after);
+  }
+  function changeConfidenceAt(i: number) {
+    const before = items;
+    const after = items.map((it, idx) =>
+      idx === i ? { ...it, confidence: nextConfidence(it.confidence) } : it,
+    );
+    onChange(after);
+    onCommit(before, after);
   }
   function add() {
+    // Just add the row; commit happens on blur if the user actually typed something.
     onChange([
       ...items,
       { text: "", confidence: "high", context: "", reason: "Manually added by editor." },
     ]);
   }
 
+  function handleTextFocus() {
+    editSnapshotRef.current = items;
+  }
+  function handleTextBlur(i: number) {
+    const before = editSnapshotRef.current;
+    editSnapshotRef.current = null;
+    if (!before) return;
+    const current = items[i];
+    // Skip empty adds (user clicked Add then blurred without typing).
+    if (!current || !current.text.trim()) {
+      // If this was a newly added empty row, silently drop it from state.
+      if (before.length < items.length && !current?.text.trim()) {
+        onChange(items.filter((_, idx) => idx !== i));
+      }
+      return;
+    }
+    const beforeItem = before[i];
+    if (beforeItem && beforeItem.text === current.text) return;
+    onCommit(before, items);
+  }
 
-  return (
-    <Card className="p-4">
-      <div className="mb-3 flex items-start justify-between gap-2">
-        <div>
-          <h3 className="text-sm font-semibold">{label}</h3>
-          <p className="text-xs text-muted-foreground">
-            {hint} · {items.length} items
-          </p>
-        </div>
-        <div className="flex items-center gap-2 text-[10px] font-medium">
-          <span className="flex items-center gap-1">
-            <span className="inline-block h-2 w-2 rounded-full bg-green-500" />
-            {counts.high}
-          </span>
-          <span className="flex items-center gap-1">
-            <span className="inline-block h-2 w-2 rounded-full bg-yellow-500" />
-            {counts.medium}
-          </span>
-          <span className="flex items-center gap-1">
-            <span className="inline-block h-2 w-2 rounded-full bg-muted-foreground" />
-            {counts.low}
-          </span>
-        </div>
-      </div>
 
-      <ul className="space-y-1.5">
-        {items.map((item, i) => {
-          const styles = CONFIDENCE_STYLES[item.confidence];
-          return (
-            <li
-              key={i}
-              className={cn(
-                "flex items-center gap-2 rounded-md border px-2 py-1 transition-colors",
-                styles.row,
-              )}
-            >
-              <button
-                type="button"
-                title={`${styles.label} — click to change`}
-                onClick={() =>
-                  updateAt(i, { confidence: nextConfidence(item.confidence) })
-                }
-                className={cn(
-                  "h-3 w-3 shrink-0 rounded-full ring-1 ring-inset ring-black/10",
-                  styles.dot,
-                )}
-              />
-              <input
-                value={item.text}
-                onChange={(e) => updateAt(i, { text: e.target.value })}
-                className="flex-1 bg-transparent text-xs font-mono outline-none"
-              />
               <Dialog>
                 <DialogTrigger asChild>
                   <button
