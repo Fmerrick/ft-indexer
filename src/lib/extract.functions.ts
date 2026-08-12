@@ -39,7 +39,7 @@ GLOBAL RULES:
 Extract every indexable term into these 10 categories. Follow these rules strictly:
 
 1) people — Names of People & Peoples. Surname first, comma, forenames, then (title/profession/distinguishing info in brackets). Include titles (King, Pope, Sir, St., Dr., Prof., Duke of), profession or speciality (astronomer, ufo witness, publisher), surname prefixes (de, da, de la, el, le, la, von, van de — treat as part of the main surname), pseudonyms, affiliations and associations, and FT relationships (correspondent, contributor). Include peoples/nationalities.
-2) topics — Topics & Casenames. Any topic subject to discussion or discourse on the page; case names; customs; festivals; weather (including unexpected or extreme conditions and weather superlatives such as hottest, longest, worst). Include ALL "see" referrals in the form: "fox fights eagle, see FT139p43".
+2) topics — Topics & Case Names. Any topic subject to discussion or discourse on the page; case names; customs; festivals; weather (including unexpected or extreme conditions and weather superlatives such as hottest, longest, worst). Include ALL "see" referrals in the form: "fox fights eagle, see FT139p43".
 3) phenomena — Physical, Psychological or Mystical Phenomena (religious or folkloric context): apparitions, bedroom invaders, bilocation, prodigious fasting, ghosts and mysterious presences, hag-ridden/sleep paralysis, healing, levitation, miracles, precognition & prophecy, poltergeists, psychokinesis/telekinesis, religious imagery & iconography, remote viewing/travelling clairvoyance, stigmata, telepathy, teleportation, visions & hallucinations, bodily control, OOBEs & NDEs, light & luminous phenomena (aura, halo), panic, social or religious drug-related experiences (entheogens: LSD, DMT, bwiti), trance/ecstasy/glossolalia, mediumship and possession, feats of endurance or strength, apparent control of elements (e.g. fire-walking), sacrifice, biological oddities (extra digits, tallest, shortest, teratology), and other unclassified phenomena.
 4) organisations — Organisations: professions, appointments, specialities; religions, cults, movements; social belief systems (especially shamanism); societies, institutions, companies; ship names.
 5) science — Scientific, Medical & Technical terms: disciplines (physics, biology, archaeology, maths theories, sociology); elements, stars, plants, processes, materials, forces; syndromes, illnesses, symptoms, treatments, procedures; scientific names of plants and animals (exclude pet names); brand names; animal & insect behaviour.
@@ -77,7 +77,7 @@ export const extractKeywords = createServerFn({ method: "POST" })
           content: [
             {
               type: "text",
-              text: "Extract all indexable keywords from this Fortean Times page into the 8 categories.",
+              text: "Extract all indexable keywords from this Fortean Times page into the 10 categories.",
             },
             {
               type: "file",

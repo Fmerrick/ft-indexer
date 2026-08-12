@@ -17,7 +17,7 @@ const SECTIONS: Array<{ key: keyof ExtractionResult; heading: string }> = [
   {
     key: "topics",
     heading:
-      "TOPICS + CASENAMES (any topic discussed on this page, case names, customs, festivals, weather including extremes and superlatives. Very important: all \"see\" referrals (eg: \"fox fights eagle, see FT139p43\")).",
+      "TOPICS + CASE NAMES (any topic discussed on this page, case names, customs, festivals, weather including extremes and superlatives. Very important: all \"see\" referrals (eg: \"fox fights eagle, see FT139p43\")).",
   },
   {
     key: "phenomena",
