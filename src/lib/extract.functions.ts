@@ -12,6 +12,7 @@ export type IndexItem = {
   confidence: Confidence;
   context: string;
   reason: string;
+  page: string;
 };
 
 export type ExtractionResult = {
@@ -30,9 +31,15 @@ export type ExtractionResult = {
 
 
 const SYSTEM_PROMPT = `You are an indexing assistant for Fortean Times magazine.
-The user will send you one page (a PDF). Read the ENTIRE page including all articles, headlines, captions, "Extra! Extra!" newspaper headline lists, and picture captions.
+The user will send you a PDF that may contain MANY pages. Process EVERY page in the PDF, from the first to the last — do not stop after the first page. On each page read all articles, headlines, captions, "Extra! Extra!" newspaper headline lists, and picture captions.
+
+PAGE NUMBERS:
+- Look for the printed page number, usually at the bottom (sometimes the top) of each page, and use it for the "page" field of every item found on that page.
+- Return it exactly as printed (e.g. "6", "43"). If a running head gives an issue number (e.g. "FT444"), you may return "FT444p43".
+- If no page number is printed on that page, return the PDF sheet position as "sheet 3".
 
 GLOBAL RULES:
+- Every item must record which page it came from.
 - Index any significant, related, indexable subject (word or phrase) mentioned on the page.
 - If an item on this page has an associated image (photo, illustration, simulacrum), append an asterisk "*" to the end of that item's text.
 
@@ -55,9 +62,10 @@ For EVERY item, also return:
   - "medium" — present but wording/spelling/category placement is uncertain.
   - "low" — inferred or possibly an OCR guess.
 - context: the exact sentence or short paragraph from the page where the term appears (verbatim quote, 1–3 sentences). If the term is only in a caption/headline list, quote that caption or headline. Keep under 400 characters.
+- page: the printed page number of the page where the term appears (see PAGE NUMBERS above).
 - reason: a brief (1–2 sentence) explanation of why you placed this term in this specific category, so a human editor can quickly judge inclusion.
 
-Return ONLY JSON matching the schema. Each array contains objects of the form { "text": string, "confidence": "high" | "medium" | "low", "context": string, "reason": string }. Do not add commentary. If a category has no items, return an empty array.`;
+Return ONLY JSON matching the schema. Each array contains objects of the form { "text": string, "confidence": "high" | "medium" | "low", "context": string, "reason": string, "page": string }. Do not add commentary. If a category has no items, return an empty array.`;
 
 
 export const extractKeywords = createServerFn({ method: "POST" })
@@ -77,7 +85,7 @@ export const extractKeywords = createServerFn({ method: "POST" })
           content: [
             {
               type: "text",
-              text: "Extract all indexable keywords from this Fortean Times page into the 10 categories.",
+              text: "Extract all indexable keywords from EVERY page of this Fortean Times PDF into the 10 categories. Include the printed page number (usually at the bottom of each page) for each item.",
             },
             {
               type: "file",
@@ -102,8 +110,9 @@ export const extractKeywords = createServerFn({ method: "POST" })
                   confidence: { type: "string", enum: ["high", "medium", "low"] },
                   context: { type: "string" },
                   reason: { type: "string" },
+                  page: { type: "string" },
                 },
-                required: ["text", "confidence", "context", "reason"],
+                required: ["text", "confidence", "context", "reason", "page"],
 
               },
             };

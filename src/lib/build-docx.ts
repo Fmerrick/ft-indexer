@@ -90,7 +90,9 @@ export async function buildDocxBlob(
         children.push(
           new Paragraph({
             bullet: { level: 0 },
-            children: [new TextRun(item.text)],
+            children: [
+              new TextRun(item.page ? `${item.text} — p${item.page}` : item.text),
+            ],
           }),
         );
       }
