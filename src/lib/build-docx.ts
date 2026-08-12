@@ -12,34 +12,48 @@ const SECTIONS: Array<{ key: keyof ExtractionResult; heading: string }> = [
   {
     key: "people",
     heading:
-      "NAMES of PEOPLE & PEOPLES (include any pseudonyms, affiliation, title, profession or distinguishing aspect eg: astronomer, ufo witness, (King, Pope, Prince, Sir, St., Dr., Prof., Duke of., etc).",
+      "NAMES of PEOPLE & PEOPLES (include titles (King, Pope, Sir, St., Dr., Prof., Duke of), profession or speciality, surname prefixes (de, da, von, van de etc), pseudonyms, affiliations, and FT relationship (correspondent, contributor)).",
   },
   {
     key: "topics",
     heading:
-      "TOPICS themselves (+ any other significant or related indexable subject (word or phrase) mentioned on this page. Very important: INTERNAL 'see' REFERALS and lists (eg: \"fox fights eagle, see FT139p43\") can also be placed here.",
+      "TOPICS + CASENAMES (any topic discussed on this page, case names, customs, festivals, weather including extremes and superlatives. Very important: all \"see\" referrals (eg: \"fox fights eagle, see FT139p43\")).",
   },
   {
-    key: "science",
+    key: "phenomena",
     heading:
-      "SCIENTIFIC, Medical & Technical Terms from all sciences & disciplines (inc. Illnesses, Elements, Stars, Plants, Processes, materials etc). Include the scientific names of plants or animals here (not pet names).",
-  },
-  { key: "filmsTV", heading: "FILMS & TV – Title and DATE only needed." },
-  { key: "letters", heading: "LETTERS – Title and letter-writer only needed." },
-  {
-    key: "fictional",
-    heading:
-      "NAMES of Legendary and Fictional Characters & Names (inc. names of Monsters, Deities, Spirits, and Entities),",
+      "PHYSICAL, PSYCHOLOGICAL or MYSTICAL PHENOMENA (religious or folkloric context: apparitions, bilocation, ghosts, healing, levitation, miracles, poltergeists, precognition, stigmata, telepathy, teleportation, visions, OOBEs & NDEs, trance & possession, feats of endurance, biological oddities etc).",
   },
   {
     key: "organisations",
     heading:
-      "NAMES of Organisations (inc. Professions, Religions, Societies, Institutions, Companies & Ships)",
+      "NAMES of ORGANISATIONS (inc. professions, appointments, specialities, religions, cults, movements, belief systems, societies, institutions, companies & ships)",
+  },
+  {
+    key: "science",
+    heading:
+      "SCIENTIFIC, Medical & Technical Terms from all disciplines (inc. illnesses, symptoms, treatments, elements, stars, plants, processes, materials, forces, brand names, animal & insect behaviour). Include the scientific names of plants or animals here (not pet names).",
+  },
+  {
+    key: "fictional",
+    heading:
+      "NAMES of Legendary and Fictional Characters & Names (inc. legends & folklore, characters from fiction, monsters and unidentified creatures, deities, spirits and entities, and colloquial names for the above),",
+  },
+  { key: "filmsTV", heading: "FILMS & TV – Title and DATE only needed." },
+  {
+    key: "letters",
+    heading:
+      "LETTERS & IT HAPPENED TO ME – Title and letter-writer only needed (Simulacra: title and sender).",
   },
   {
     key: "places",
     heading:
-      "PLACES – TOWN, COUNTY and COUNTRY – or significant geographical feature (lake, forest, mountain etc).",
+      "PLACES – TOWN, COUNTY and COUNTRY – or significant geographical feature (lake, forest, mountain, river etc).",
+  },
+  {
+    key: "behaviour",
+    heading:
+      "BEHAVIOUR – reactive words (verbs, nouns & adjectives, eg. fear, frighten, frightened). Attacks on / attacks by; manipulation by authorities; large-scale conflicts; fads, manias, obsessions; sleep & dream phenomena; conspiracies, delusions, panics, pranks; collectors.",
   },
 ];
 
