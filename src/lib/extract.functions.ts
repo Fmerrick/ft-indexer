@@ -12,6 +12,7 @@ export type IndexItem = {
   confidence: Confidence;
   context: string;
   reason: string;
+  page: string;
 };
 
 export type ExtractionResult = {
