@@ -77,7 +77,7 @@ export const extractKeywords = createServerFn({ method: "POST" })
           content: [
             {
               type: "text",
-              text: "Extract all indexable keywords from this Fortean Times page into the 8 categories.",
+              text: "Extract all indexable keywords from this Fortean Times page into the 10 categories.",
             },
             {
               type: "file",
