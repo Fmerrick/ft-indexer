@@ -26,6 +26,8 @@ import {
   type Confidence,
 } from "@/lib/extract.functions";
 import { buildDocxBlob } from "@/lib/build-docx";
+import { buildHtmlBlob } from "@/lib/build-html";
+
 import {
   diffCategory,
   describeEvent,
@@ -77,7 +79,10 @@ const CATEGORIES: Array<{ key: CategoryKey; label: string; hint: string }> = [
   { key: "behaviour", label: "Behaviour", hint: "Attacks by/on, manias, conspiracies, dreams" },
 ];
 
+type ExportFormat = "html" | "docx";
+
 const CONFIDENCE_ORDER: Confidence[] = ["high", "medium", "low"];
+
 
 const CONFIDENCE_STYLES: Record<
   Confidence,
@@ -118,6 +123,8 @@ function IndexerPage() {
   const [file, setFile] = useState<File | null>(null);
   const [pageLabel, setPageLabel] = useState("");
   const [loading, setLoading] = useState(false);
+  const [format, setFormat] = useState<ExportFormat>("html");
+
   const [result, setResult] = useState<ExtractionResult | null>(null);
 
   const [askWhy, setAskWhy] = useState(false);
@@ -209,18 +216,23 @@ function IndexerPage() {
     if (diff) recordEvent(diff);
   }
 
-  async function handleDownload() {
+  async function handleDownload(fmt: ExportFormat = format) {
     if (!result) return;
-    const blob = await buildDocxBlob(result, pageLabel || "output");
+    const label = pageLabel || "ft-index";
+    const blob =
+      fmt === "html"
+        ? buildHtmlBlob(result, pageLabel || "output")
+        : await buildDocxBlob(result, pageLabel || "output");
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${pageLabel || "ft-index"}.docx`;
+    a.download = `${label}.${fmt}`;
     document.body.appendChild(a);
     a.click();
     a.remove();
     URL.revokeObjectURL(url);
   }
+
 
 
   return (
@@ -238,7 +250,7 @@ function IndexerPage() {
           <p className="mt-2 text-sm text-muted-foreground">
             Upload a page PDF. The AI reads the whole page, sorts every indexable
             term into the ten FT categories, and marks each with a confidence
-            rating. Edit anything, then export as .docx.
+            rating. Edit anything, then export as HTML (default) or .docx.
           </p>
           <Link
             to="/categories"
@@ -333,9 +345,29 @@ function IndexerPage() {
                 ))}
                 <span className="ml-2">Click the dot to cycle confidence.</span>
               </div>
-              <Button onClick={handleDownload}>
-                <Download className="h-4 w-4" /> Download .docx
-              </Button>
+              <div className="flex items-center gap-2">
+                <div className="flex rounded-md border border-input p-0.5">
+                  {(["html", "docx"] as ExportFormat[]).map((f) => (
+                    <button
+                      key={f}
+                      type="button"
+                      onClick={() => setFormat(f)}
+                      className={cn(
+                        "rounded px-3 py-1 text-xs font-medium",
+                        format === f
+                          ? "bg-primary text-primary-foreground"
+                          : "text-muted-foreground hover:text-foreground",
+                      )}
+                    >
+                      .{f}
+                    </button>
+                  ))}
+                </div>
+                <Button onClick={() => handleDownload()}>
+                  <Download className="h-4 w-4" /> Download .{format}
+                </Button>
+              </div>
+
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
@@ -354,9 +386,18 @@ function IndexerPage() {
             </div>
 
             <div className="flex justify-end pt-4">
-              <Button onClick={handleDownload} size="lg">
-                <Download className="h-4 w-4" /> Download .docx
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => handleDownload(format === "html" ? "docx" : "html")}
+              >
+                <Download className="h-4 w-4" />{" "}
+                Download .{format === "html" ? "docx" : "html"}
               </Button>
+              <Button onClick={() => handleDownload()} size="lg">
+                <Download className="h-4 w-4" /> Download .{format}
+              </Button>
+
             </div>
           </>
         )}
