@@ -65,14 +65,16 @@ export const Route = createFileRoute("/")({
 type CategoryKey = keyof ExtractionResult;
 
 const CATEGORIES: Array<{ key: CategoryKey; label: string; hint: string }> = [
-  { key: "people", label: "Names of People & Peoples", hint: "Surname, forenames (title/role)" },
-  { key: "topics", label: "Topics & 'see' referrals", hint: "Subjects, phrases, cross-refs" },
-  { key: "science", label: "Scientific / Medical / Technical", hint: "Illnesses, species, materials" },
+  { key: "people", label: "Names of People & Peoples", hint: "Surname, forenames (title/role/affiliation)" },
+  { key: "topics", label: "Topics & Casenames", hint: "Subjects, cases, customs, festivals, weather, 'see' refs" },
+  { key: "phenomena", label: "Physical / Psychological / Mystical Phenomena", hint: "Apparitions, poltergeists, visions, trance" },
+  { key: "organisations", label: "Organisations", hint: "Professions, religions, societies, companies, ships" },
+  { key: "science", label: "Scientific / Medical / Technical", hint: "Disciplines, illnesses, species, materials, brands" },
+  { key: "fictional", label: "Legendary & Fictional", hint: "Monsters, deities, spirits, folklore" },
   { key: "filmsTV", label: "Films & TV", hint: "Title (date)" },
-  { key: "letters", label: "Letters", hint: "Title — writer" },
-  { key: "fictional", label: "Legendary & Fictional", hint: "Monsters, deities, entities" },
-  { key: "organisations", label: "Organisations", hint: "Also professions, ships, companies" },
+  { key: "letters", label: "Letters & It Happened To Me", hint: "Title — writer" },
   { key: "places", label: "Places", hint: "Town, county, country, features" },
+  { key: "behaviour", label: "Behaviour", hint: "Attacks by/on, manias, conspiracies, dreams" },
 ];
 
 const CONFIDENCE_ORDER: Confidence[] = ["high", "medium", "low"];

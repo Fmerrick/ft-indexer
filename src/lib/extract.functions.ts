@@ -17,12 +17,14 @@ export type IndexItem = {
 export type ExtractionResult = {
   people: IndexItem[];
   topics: IndexItem[];
+  phenomena: IndexItem[];
+  organisations: IndexItem[];
   science: IndexItem[];
+  fictional: IndexItem[];
   filmsTV: IndexItem[];
   letters: IndexItem[];
-  fictional: IndexItem[];
-  organisations: IndexItem[];
   places: IndexItem[];
+  behaviour: IndexItem[];
 };
 
 
@@ -30,16 +32,22 @@ export type ExtractionResult = {
 const SYSTEM_PROMPT = `You are an indexing assistant for Fortean Times magazine.
 The user will send you one page (a PDF). Read the ENTIRE page including all articles, headlines, captions, "Extra! Extra!" newspaper headline lists, and picture captions.
 
-Extract every indexable term into these 8 categories. Follow these rules strictly:
+GLOBAL RULES:
+- Index any significant, related, indexable subject (word or phrase) mentioned on the page.
+- If an item on this page has an associated image (photo, illustration, simulacrum), append an asterisk "*" to the end of that item's text.
 
-1) people — Names of People & Peoples. Surname first, comma, forenames, then (title/profession/distinguishing info in brackets). Include witnesses, victims, contributors, officials, pseudonyms, and nationalities/peoples (e.g. "British").
-2) topics — The topics of the page + any other significant/indexable subject (word or phrase). Include specific attack constructions like "attack by: skinheads", "attack on: schoolgirl", "attack with; razors". Include INTERNAL "see" REFERRALS in the form: "self-victimisers and hoaxers: see FT71:xx".
-3) science — Scientific, medical & technical terms (illnesses, elements, stars, plants, animals by scientific/common name — NOT pet names, processes, materials, technology). Include physical objects central to the story (e.g. wheelchair, aircraft).
-4) filmsTV — Films & TV titles with date, if any.
-5) letters — Reader letters: title and letter-writer, if any.
-6) fictional — Legendary & fictional characters, monsters, deities, spirits, entities (e.g. Satan).
-7) organisations — Organisations, professions, religions, societies, institutions, companies, ships. Include role/profession nouns (e.g. skinhead, prosecutor, jogger, pilot, victim).
-8) places — Town, county, country, or significant geographical feature. Include compound forms like "Halle, East Germany".
+Extract every indexable term into these 10 categories. Follow these rules strictly:
+
+1) people — Names of People & Peoples. Surname first, comma, forenames, then (title/profession/distinguishing info in brackets). Include titles (King, Pope, Sir, St., Dr., Prof., Duke of), profession or speciality (astronomer, ufo witness, publisher), surname prefixes (de, da, de la, el, le, la, von, van de — treat as part of the main surname), pseudonyms, affiliations and associations, and FT relationships (correspondent, contributor). Include peoples/nationalities.
+2) topics — Topics & Casenames. Any topic subject to discussion or discourse on the page; case names; customs; festivals; weather (including unexpected or extreme conditions and weather superlatives such as hottest, longest, worst). Include ALL "see" referrals in the form: "fox fights eagle, see FT139p43".
+3) phenomena — Physical, Psychological or Mystical Phenomena (religious or folkloric context): apparitions, bedroom invaders, bilocation, prodigious fasting, ghosts and mysterious presences, hag-ridden/sleep paralysis, healing, levitation, miracles, precognition & prophecy, poltergeists, psychokinesis/telekinesis, religious imagery & iconography, remote viewing/travelling clairvoyance, stigmata, telepathy, teleportation, visions & hallucinations, bodily control, OOBEs & NDEs, light & luminous phenomena (aura, halo), panic, social or religious drug-related experiences (entheogens: LSD, DMT, bwiti), trance/ecstasy/glossolalia, mediumship and possession, feats of endurance or strength, apparent control of elements (e.g. fire-walking), sacrifice, biological oddities (extra digits, tallest, shortest, teratology), and other unclassified phenomena.
+4) organisations — Organisations: professions, appointments, specialities; religions, cults, movements; social belief systems (especially shamanism); societies, institutions, companies; ship names.
+5) science — Scientific, Medical & Technical terms: disciplines (physics, biology, archaeology, maths theories, sociology); elements, stars, plants, processes, materials, forces; syndromes, illnesses, symptoms, treatments, procedures; scientific names of plants and animals (exclude pet names); brand names; animal & insect behaviour.
+6) fictional — Legendary and Fictional names: legends & folklore; characters from fiction, films, books; monsters and unidentified creatures; deities, spirits and entities from religions; related words from folklore, legends and belief systems; colloquial names for the above.
+7) filmsTV — Films & TV: title and publication/release date only.
+8) letters — Letters & "It Happened To Me" (reader submissions, corrections, refutations, unusual experiences). Letters: title and letter-writer only. IHTM: title and writer only. Simulacra: title and sender only (usually image related — remember the asterisk).
+9) places — Town, county and country where given (no street addresses); significant geographical features (lake, forest, mountain, river etc). Include compound forms like "Halle, East Germany".
+10) behaviour — Reactive words (verbs, nouns & adjectives; e.g. fear, frighten, frightening, frightened, afraid). Acts of aggression have two directions: record both "attack on: (person/animal/object)" and "attack by: (person/animal/object)". Also: manipulation by (government, institutions, authorities); large-scale conflicts; fads, manias, obsessions, compulsions; sleep & dream phenomena; theorising — conspiracies, delusions, panics, pranks; collectors.
 
 For EVERY item, also return:
 - confidence: "high" | "medium" | "low"
@@ -105,22 +113,26 @@ export const extractKeywords = createServerFn({ method: "POST" })
               properties: {
                 people: itemSchema,
                 topics: itemSchema,
+                phenomena: itemSchema,
+                organisations: itemSchema,
                 science: itemSchema,
+                fictional: itemSchema,
                 filmsTV: itemSchema,
                 letters: itemSchema,
-                fictional: itemSchema,
-                organisations: itemSchema,
                 places: itemSchema,
+                behaviour: itemSchema,
               },
               required: [
                 "people",
                 "topics",
+                "phenomena",
+                "organisations",
                 "science",
+                "fictional",
                 "filmsTV",
                 "letters",
-                "fictional",
-                "organisations",
                 "places",
+                "behaviour",
               ],
             };
           })(),
@@ -156,12 +168,14 @@ export const extractKeywords = createServerFn({ method: "POST" })
     const empty: ExtractionResult = {
       people: [],
       topics: [],
+      phenomena: [],
+      organisations: [],
       science: [],
+      fictional: [],
       filmsTV: [],
       letters: [],
-      fictional: [],
-      organisations: [],
       places: [],
+      behaviour: [],
     };
     return { ...empty, ...parsed };
   });
