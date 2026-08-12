@@ -17,12 +17,14 @@ export type IndexItem = {
 export type ExtractionResult = {
   people: IndexItem[];
   topics: IndexItem[];
+  phenomena: IndexItem[];
+  organisations: IndexItem[];
   science: IndexItem[];
+  fictional: IndexItem[];
   filmsTV: IndexItem[];
   letters: IndexItem[];
-  fictional: IndexItem[];
-  organisations: IndexItem[];
   places: IndexItem[];
+  behaviour: IndexItem[];
 };
 
 
