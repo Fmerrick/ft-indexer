@@ -248,9 +248,9 @@ function IndexerPage() {
             Fortean Times Indexing Assistant
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Upload a page PDF. The AI reads the whole page, sorts every indexable
-            term into the ten FT categories, and marks each with a confidence
-            rating. Edit anything, then export as HTML (default) or .docx.
+            Upload a page or a multi-page PDF. The AI reads every page, records
+            the printed page number, sorts every indexable term into the ten FT
+            categories, and marks each with a confidence rating. Edit anything, then export as HTML (default) or .docx.
           </p>
           <Link
             to="/categories"
@@ -287,7 +287,9 @@ function IndexerPage() {
         <Card className="p-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
             <div className="flex-1">
-              <label className="text-sm font-medium mb-2 block">Page PDF</label>
+              <label className="text-sm font-medium mb-2 block">
+                PDF (single or multi-page)
+              </label>
               <div className="flex items-center gap-3">
                 <label className="flex-1 flex items-center gap-2 rounded-md border border-dashed border-input px-3 py-2 cursor-pointer hover:bg-accent">
                   <Upload className="h-4 w-4" />
@@ -305,7 +307,7 @@ function IndexerPage() {
             </div>
             <div className="sm:w-56">
               <label className="text-sm font-medium mb-2 block">
-                Page label (for output)
+                Issue label (for output)
               </label>
               <Input
                 placeholder="e.g. FT76p06"
@@ -404,7 +406,7 @@ function IndexerPage() {
 
         {!result && !loading && (
           <Card className="p-10 text-center text-sm text-muted-foreground">
-            Upload a PDF page to get started.
+            Upload a PDF (single page or multi-page) to get started.
           </Card>
         )}
       </main>
@@ -498,7 +500,13 @@ function CategoryCard({
     // Just add the row; commit happens on blur if the user actually typed something.
     onChange([
       ...items,
-      { text: "", confidence: "high", context: "", reason: "Manually added by editor." },
+      {
+        text: "",
+        confidence: "high",
+        context: "",
+        reason: "Manually added by editor.",
+        page: "",
+      },
     ]);
   }
 
@@ -568,6 +576,11 @@ function CategoryCard({
                   styles.dot,
                 )}
               />
+              {item.page ? (
+                <span className="shrink-0 rounded bg-background/70 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
+                  p{item.page}
+                </span>
+              ) : null}
               <input
                 value={item.text}
                 onChange={(e) => updateAt(i, { text: e.target.value })}
@@ -594,6 +607,11 @@ function CategoryCard({
                     <DialogDescription>
                       Category: <span className="font-medium">{label}</span> · Confidence:{" "}
                       <span className="font-medium">{item.confidence}</span>
+                      {item.page ? (
+                        <>
+                          {" "}· Page: <span className="font-medium">{item.page}</span>
+                        </>
+                      ) : null}
                     </DialogDescription>
                   </DialogHeader>
                   <div className="space-y-4 text-sm">
