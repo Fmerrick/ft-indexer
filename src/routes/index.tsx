@@ -26,6 +26,8 @@ import {
   type Confidence,
 } from "@/lib/extract.functions";
 import { buildDocxBlob } from "@/lib/build-docx";
+import { buildHtmlBlob } from "@/lib/build-html";
+
 import {
   diffCategory,
   describeEvent,
@@ -77,7 +79,10 @@ const CATEGORIES: Array<{ key: CategoryKey; label: string; hint: string }> = [
   { key: "behaviour", label: "Behaviour", hint: "Attacks by/on, manias, conspiracies, dreams" },
 ];
 
+type ExportFormat = "html" | "docx";
+
 const CONFIDENCE_ORDER: Confidence[] = ["high", "medium", "low"];
+
 
 const CONFIDENCE_STYLES: Record<
   Confidence,
@@ -118,6 +123,8 @@ function IndexerPage() {
   const [file, setFile] = useState<File | null>(null);
   const [pageLabel, setPageLabel] = useState("");
   const [loading, setLoading] = useState(false);
+  const [format, setFormat] = useState<ExportFormat>("html");
+
   const [result, setResult] = useState<ExtractionResult | null>(null);
 
   const [askWhy, setAskWhy] = useState(false);
