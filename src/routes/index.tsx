@@ -345,9 +345,29 @@ function IndexerPage() {
                 ))}
                 <span className="ml-2">Click the dot to cycle confidence.</span>
               </div>
-              <Button onClick={handleDownload}>
-                <Download className="h-4 w-4" /> Download .docx
-              </Button>
+              <div className="flex items-center gap-2">
+                <div className="flex rounded-md border border-input p-0.5">
+                  {(["html", "docx"] as ExportFormat[]).map((f) => (
+                    <button
+                      key={f}
+                      type="button"
+                      onClick={() => setFormat(f)}
+                      className={cn(
+                        "rounded px-3 py-1 text-xs font-medium",
+                        format === f
+                          ? "bg-primary text-primary-foreground"
+                          : "text-muted-foreground hover:text-foreground",
+                      )}
+                    >
+                      .{f}
+                    </button>
+                  ))}
+                </div>
+                <Button onClick={() => handleDownload()}>
+                  <Download className="h-4 w-4" /> Download .{format}
+                </Button>
+              </div>
+
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
@@ -366,9 +386,18 @@ function IndexerPage() {
             </div>
 
             <div className="flex justify-end pt-4">
-              <Button onClick={handleDownload} size="lg">
-                <Download className="h-4 w-4" /> Download .docx
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => handleDownload(format === "html" ? "docx" : "html")}
+              >
+                <Download className="h-4 w-4" />{" "}
+                Download .{format === "html" ? "docx" : "html"}
               </Button>
+              <Button onClick={() => handleDownload()} size="lg">
+                <Download className="h-4 w-4" /> Download .{format}
+              </Button>
+
             </div>
           </>
         )}
