@@ -209,18 +209,23 @@ function IndexerPage() {
     if (diff) recordEvent(diff);
   }
 
-  async function handleDownload() {
+  async function handleDownload(fmt: ExportFormat = format) {
     if (!result) return;
-    const blob = await buildDocxBlob(result, pageLabel || "output");
+    const label = pageLabel || "ft-index";
+    const blob =
+      fmt === "html"
+        ? buildHtmlBlob(result, pageLabel || "output")
+        : await buildDocxBlob(result, pageLabel || "output");
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${pageLabel || "ft-index"}.docx`;
+    a.download = `${label}.${fmt}`;
     document.body.appendChild(a);
     a.click();
     a.remove();
     URL.revokeObjectURL(url);
   }
+
 
 
   return (
