@@ -47,7 +47,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Upload a Fortean Times page PDF and generate a keyword index sorted into the eight FT indexing categories.",
+          "Upload a Fortean Times page PDF and generate a keyword index sorted into the ten FT indexing categories.",
       },
       { property: "og:title", content: "Fortean Times Indexing Assistant" },
       {
@@ -66,7 +66,7 @@ type CategoryKey = keyof ExtractionResult;
 
 const CATEGORIES: Array<{ key: CategoryKey; label: string; hint: string }> = [
   { key: "people", label: "Names of People & Peoples", hint: "Surname, forenames (title/role/affiliation)" },
-  { key: "topics", label: "Topics & Casenames", hint: "Subjects, cases, customs, festivals, weather, 'see' refs" },
+  { key: "topics", label: "Topics & Case Names", hint: "Subjects, cases, customs, festivals, weather, 'see' refs" },
   { key: "phenomena", label: "Physical / Psychological / Mystical Phenomena", hint: "Apparitions, poltergeists, visions, trance" },
   { key: "organisations", label: "Organisations", hint: "Professions, religions, societies, companies, ships" },
   { key: "science", label: "Scientific / Medical / Technical", hint: "Disciplines, illnesses, species, materials, brands" },
@@ -237,7 +237,7 @@ function IndexerPage() {
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
             Upload a page PDF. The AI reads the whole page, sorts every indexable
-            term into the eight FT categories, and marks each with a confidence
+            term into the ten FT categories, and marks each with a confidence
             rating. Edit anything, then export as .docx.
           </p>
         </div>
