@@ -250,7 +250,7 @@ function IndexerPage() {
           <p className="mt-2 text-sm text-muted-foreground">
             Upload a page PDF. The AI reads the whole page, sorts every indexable
             term into the ten FT categories, and marks each with a confidence
-            rating. Edit anything, then export as .docx.
+            rating. Edit anything, then export as HTML (default) or .docx.
           </p>
           <Link
             to="/categories"
