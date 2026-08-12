@@ -168,12 +168,14 @@ export const extractKeywords = createServerFn({ method: "POST" })
     const empty: ExtractionResult = {
       people: [],
       topics: [],
+      phenomena: [],
+      organisations: [],
       science: [],
+      fictional: [],
       filmsTV: [],
       letters: [],
-      fictional: [],
-      organisations: [],
       places: [],
+      behaviour: [],
     };
     return { ...empty, ...parsed };
   });
