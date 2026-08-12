@@ -160,6 +160,9 @@ function CategoriesPage() {
             illustration, simulacrum) take an asterisk <span className="font-mono">*</span> at
             the end of the entry.
           </p>
+          <p className="mt-3 text-sm text-muted-foreground">
+            <span className="font-semibold text-foreground">Version:</span> N/A
+          </p>
         </div>
       </header>
 
