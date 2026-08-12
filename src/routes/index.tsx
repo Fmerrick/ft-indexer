@@ -240,6 +240,12 @@ function IndexerPage() {
             term into the ten FT categories, and marks each with a confidence
             rating. Edit anything, then export as .docx.
           </p>
+          <Link
+            to="/categories"
+            className="mt-3 inline-block text-sm font-medium underline underline-offset-4 hover:text-foreground"
+          >
+            See the ten keyword categories and examples
+          </Link>
         </div>
       </header>
 
