@@ -1,14 +1,18 @@
-# Welcome to your Lovable project
+# Lovable FT Archive
+
+Fortean Times (FT) is a venerable and well-respected UK magazine covering fortean topics. It has been publishing since 1973. One of the founders and editors is working to index all issues of FT, working from PDF scans and OCR results from those scans. Can you do OCR directly from PDFs?
 
 This project was built with [Lovable](https://lovable.dev).
 
+**Live app**: https://ft-indexer.lovable.app
+
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/87965f86-dfb8-472d-aa46-329bb86f27fd).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +24,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
