@@ -18,19 +18,19 @@ export type IndexItem = {
 export type ExtractionResult = {
   people: IndexItem[];
   topics: IndexItem[];
-  phenomena: IndexItem[];
   organisations: IndexItem[];
   science: IndexItem[];
   fictional: IndexItem[];
+  places: IndexItem[];
+  dates: IndexItem[];
   filmsTV: IndexItem[];
   letters: IndexItem[];
-  places: IndexItem[];
-  behaviour: IndexItem[];
+  reviews: IndexItem[];
 };
 
 
 
-const SYSTEM_PROMPT = `You are an indexing assistant for Fortean Times magazine.
+const SYSTEM_PROMPT = `You are an indexing assistant for Fortean Times magazine, using the FT keyword category system v.30c.
 The user will send you a PDF that may contain MANY pages. Process EVERY page in the PDF, from the first to the last — do not stop after the first page. On each page read all articles, headlines, captions, "Extra! Extra!" newspaper headline lists, and picture captions.
 
 PAGE NUMBERS:
@@ -45,16 +45,36 @@ GLOBAL RULES:
 
 Extract every indexable term into these 10 categories. Follow these rules strictly:
 
-1) people — Names of People & Peoples. Surname first, comma, forenames, then (title/profession/distinguishing info in brackets). Include titles (King, Pope, Sir, St., Dr., Prof., Duke of), profession or speciality (astronomer, ufo witness, publisher), surname prefixes (de, da, de la, el, le, la, von, van de — treat as part of the main surname), pseudonyms, affiliations and associations, and FT relationships (correspondent, contributor). Include peoples/nationalities.
-2) topics — Topics & Case Names. Any topic subject to discussion or discourse on the page; case names; customs; festivals; weather (including unexpected or extreme conditions and weather superlatives such as hottest, longest, worst). Include ALL "see" referrals in the form: "fox fights eagle, see FT139p43".
-3) phenomena — Physical, Psychological or Mystical Phenomena (religious or folkloric context): apparitions, bedroom invaders, bilocation, prodigious fasting, ghosts and mysterious presences, hag-ridden/sleep paralysis, healing, levitation, miracles, precognition & prophecy, poltergeists, psychokinesis/telekinesis, religious imagery & iconography, remote viewing/travelling clairvoyance, stigmata, telepathy, teleportation, visions & hallucinations, bodily control, OOBEs & NDEs, light & luminous phenomena (aura, halo), panic, social or religious drug-related experiences (entheogens: LSD, DMT, bwiti), trance/ecstasy/glossolalia, mediumship and possession, feats of endurance or strength, apparent control of elements (e.g. fire-walking), sacrifice, biological oddities (extra digits, tallest, shortest, teratology), and other unclassified phenomena.
-4) organisations — Organisations: professions, appointments, specialities; religions, cults, movements; social belief systems (especially shamanism); societies, institutions, companies; ship names.
-5) science — Scientific, Medical & Technical terms: disciplines (physics, biology, archaeology, maths theories, sociology); elements, stars, plants, processes, materials, forces; syndromes, illnesses, symptoms, treatments, procedures; scientific names of plants and animals (exclude pet names); brand names; animal & insect behaviour.
-6) fictional — Legendary and Fictional names: legends & folklore; characters from fiction, films, books; monsters and unidentified creatures; deities, spirits and entities from religions; related words from folklore, legends and belief systems; colloquial names for the above.
-7) filmsTV — Films & TV: title and publication/release date only.
-8) letters — Letters & "It Happened To Me" (reader submissions, corrections, refutations, unusual experiences). Letters: title and letter-writer only. IHTM: title and writer only. Simulacra: title and sender only (usually image related — remember the asterisk).
-9) places — Town, county and country where given (no street addresses); significant geographical features (lake, forest, mountain, river etc). Include compound forms like "Halle, East Germany".
-10) behaviour — Reactive words (verbs, nouns & adjectives; e.g. fear, frighten, frightening, frightened, afraid). Acts of aggression have two directions: record both "attack on: (person/animal/object)" and "attack by: (person/animal/object)". Also: manipulation by (government, institutions, authorities); large-scale conflicts; fads, manias, obsessions, compulsions; sleep & dream phenomena; theorising — conspiracies, delusions, panics, pranks; collectors.
+1) people — NAMES of PEOPLE & PEOPLES. Surname first, comma, forenames, then any pseudonym, affiliation, title, profession or distinguishing aspect in brackets (e.g. astronomer, ufo witness, editor, King, Pope, Sir, St., Dr., Prof., Duchess of). For Prof., mention the subject and/or institution. Use "St." for Saint. Keep surname prefixes (de, da, de la, el, le, la, von, van de) with the surname. Add "FT correspondent" or "FT contributor" where indicated. If there is only a surname with no qualification, use "Mr" or "Mrs" as appropriate; if uncertain, omit it. For Peoples include Nation/Tribe/Origin (e.g. Navajo, Celt, Ainu, American).
+
+2) topics — TOPICS + CASENAMES. A general category for observations, reports or discussions of ANY indexable object, subject, word or phrase mentioned on the page. Includes:
+   - Very important: ALL internal "see" referrals (e.g. "fox fights eagle, see FT139p43").
+   - Casenames (e.g. Bermuda Triangle, Roswell, Atlantis, Skinwalker Ranch, Satanic Panic, Buried Alive, Project Blue Book, The Apollo Program).
+   - Strange phenomena generally: ufology, earth mysteries, lost lands/tribes/continents, coincidences & synchronicity, luck, falls (of frogs, fish, stones), strange forces (antigravity, invisible barriers), time travel & time slips, weather anomalies, aerial booms & hums.
+   - Unusual consciousness-related experiences: entity encounters (fairies, aliens, gods), night paralysis, savants & memory phenomena, altered consciousness (incl. psychedelics & entheogens), OOBEs & NDEs, sleep & dream phenomena, trance & hypnosis.
+   - Cultural, sociological & psychological: witches, shamans, gurus; rituals & festivals; mind control & conspiracies; crime & punishment; religious movements; cults & conspiracy theorists; historical & cultural revision.
+   - Spiritual, mystical & folkloric: physical phenomena of mysticism (stigmata, levitation, miracles), ghosts & hauntings (incl. poltergeists), states of consciousness, omens & portents, spontaneous images in nature.
+   - Psychology & parapsychology: psychical phenomena (telepathy, remote viewing, clairvoyance, psychokinesis), multiple personality, human stupidity & odd crimes, mass hysteria & collective behaviour, prediction & prophecy, feats, talents & austerities.
+   - Human & animal behaviour: swarms & migration, attacks on & attacks by, animal intelligence, outsiders & imposters, sexual oddities.
+   - Cryptozoology & cryptobotany; out-of-place creatures; out-of-place objects; exploration & new lands; unclassified remainder.
+   - Reactive behaviour words (verbs, nouns & adjectives; e.g. frighten, frightening, frightened).
+   - Lists can be indicated here by Title or Subject.
+
+3) organisations — NAMES of ORGANISATIONS and VESSELS: professions and professional organisations; religions & sects; societies & institutions; philosophical, political or religious movements; companies & brand names; named vessels, spacecraft and submersibles (manned or unmanned, e.g. The Mary Celeste, Voyager II).
+
+4) science — SCIENTIFIC, Medical & Technical: terms from and references to any science, academic discipline or speciality (philosophical & theoretical sciences, empirical sciences, history & anthropology, astronomy & cosmology, medicine & biology, archaeology & palaeontology). Include common names AND scientific names of organisms, plants or animals (but omit pet names). Include illnesses, elements, stars & planets, processes, materials, equipment, classifications.
+
+5) fictional — NAMES (Legendary and Fictional): from mythology, fiction, folklore, legend, fantasy, any religion and modern popular culture. Names of gods, deities, spirits and non-human entities; colloquial, regional, ethnic or tribal names for monsters.
+
+6) places — PLACES: TOWN, COUNTY/STATE/PROVINCE (as appropriate) and COUNTRY only; or significant geographical features (lake, forest, mountain, river). Also fixed, named locations (e.g. Brooklands Racetrack, Chicago-O'Hare Airport). Compound forms like "Halle, East Germany" are fine.
+
+7) dates — DATES: year, month, day (when given); durations or extensions (e.g. from 6 June 1978 to 12 January 1979); periods and eras (e.g. the 1800s, the Tudor Period, New Kingdom Egypt, Meiji Era).
+
+8) filmsTV — FILMS & TV (short item): title and date only needed.
+
+9) letters — LETTERS & It Happened To Me (short item): title and correspondent name only. Contents are captured under the other categories as appropriate.
+
+10) reviews — REVIEWS: title and author of the reviewed item.
 
 For EVERY item, also return:
 - confidence: "high" | "medium" | "low"
@@ -85,7 +105,7 @@ export const extractKeywords = createServerFn({ method: "POST" })
           content: [
             {
               type: "text",
-              text: "Extract all indexable keywords from EVERY page of this Fortean Times PDF into the 10 categories. Include the printed page number (usually at the bottom of each page) for each item.",
+              text: "Extract all indexable keywords from EVERY page of this Fortean Times PDF into the 10 categories (v.30c). Include the printed page number (usually at the bottom of each page) for each item.",
             },
             {
               type: "file",
@@ -122,26 +142,26 @@ export const extractKeywords = createServerFn({ method: "POST" })
               properties: {
                 people: itemSchema,
                 topics: itemSchema,
-                phenomena: itemSchema,
                 organisations: itemSchema,
                 science: itemSchema,
                 fictional: itemSchema,
+                places: itemSchema,
+                dates: itemSchema,
                 filmsTV: itemSchema,
                 letters: itemSchema,
-                places: itemSchema,
-                behaviour: itemSchema,
+                reviews: itemSchema,
               },
               required: [
                 "people",
                 "topics",
-                "phenomena",
                 "organisations",
                 "science",
                 "fictional",
+                "places",
+                "dates",
                 "filmsTV",
                 "letters",
-                "places",
-                "behaviour",
+                "reviews",
               ],
             };
           })(),
@@ -177,14 +197,14 @@ export const extractKeywords = createServerFn({ method: "POST" })
     const empty: ExtractionResult = {
       people: [],
       topics: [],
-      phenomena: [],
       organisations: [],
       science: [],
       fictional: [],
+      places: [],
+      dates: [],
       filmsTV: [],
       letters: [],
-      places: [],
-      behaviour: [],
+      reviews: [],
     };
     return { ...empty, ...parsed };
   });

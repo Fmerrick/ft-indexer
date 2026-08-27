@@ -12,48 +12,50 @@ const SECTIONS: Array<{ key: keyof ExtractionResult; heading: string }> = [
   {
     key: "people",
     heading:
-      "NAMES of PEOPLE & PEOPLES (include titles (King, Pope, Sir, St., Dr., Prof., Duke of), profession or speciality, surname prefixes (de, da, von, van de etc), pseudonyms, affiliations, and FT relationship (correspondent, contributor)).",
+      "NAMES of PEOPLE & PEOPLES — include any pseudonym, affiliation, title, profession or distinguishing aspect (astronomer, ufo witness, editor, King, Pope, Sir, St., Dr., Prof. — with subject/institution, Duchess of). Use St. for Saint. Add 'FT correspondent' or 'FT contributor' where indicated. For Peoples: Nation/Tribe/Origin.",
   },
   {
     key: "topics",
     heading:
-      "TOPICS + CASE NAMES (any topic discussed on this page, case names, customs, festivals, weather including extremes and superlatives. Very important: all \"see\" referrals (eg: \"fox fights eagle, see FT139p43\")).",
-  },
-  {
-    key: "phenomena",
-    heading:
-      "PHYSICAL, PSYCHOLOGICAL or MYSTICAL PHENOMENA (religious or folkloric context: apparitions, bilocation, ghosts, healing, levitation, miracles, poltergeists, precognition, stigmata, telepathy, teleportation, visions, OOBEs & NDEs, trance & possession, feats of endurance, biological oddities etc).",
+      "TOPICS + CASENAMES — any indexable object, subject, word or phrase mentioned on the page: casenames, strange phenomena, ufology, earth mysteries, coincidences, falls, time slips, weather anomalies, consciousness experiences, entity encounters, OOBEs & NDEs, rituals, conspiracies, ghosts & hauntings, stigmata, omens, psychical phenomena, feats, human & animal behaviour, attacks on/by, cryptozoology, out-of-place creatures & objects, reactive behaviour words, lists. Very important: all \"see\" referrals (eg: \"fox fights eagle, see FT139p43\").",
   },
   {
     key: "organisations",
     heading:
-      "NAMES of ORGANISATIONS (inc. professions, appointments, specialities, religions, cults, movements, belief systems, societies, institutions, companies & ships)",
+      "NAMES of ORGANISATIONS and VESSELS — professions & professional organisations, religions & sects, societies & institutions, movements, companies & brand names, named vessels, spacecraft & submersibles (eg. The Mary Celeste, Voyager II).",
   },
   {
     key: "science",
     heading:
-      "SCIENTIFIC, Medical & Technical Terms from all disciplines (inc. illnesses, symptoms, treatments, elements, stars, plants, processes, materials, forces, brand names, animal & insect behaviour). Include the scientific names of plants or animals here (not pet names).",
+      "SCIENTIFIC, Medical & Technical — terms from any science, academic discipline or speciality. Common and scientific names of organisms, plants or animals (omit pet names). Illnesses, elements, stars & planets, processes, materials, equipment, classifications.",
   },
   {
     key: "fictional",
     heading:
-      "NAMES of Legendary and Fictional Characters & Names (inc. legends & folklore, characters from fiction, monsters and unidentified creatures, deities, spirits and entities, and colloquial names for the above),",
-  },
-  { key: "filmsTV", heading: "FILMS & TV – Title and DATE only needed." },
-  {
-    key: "letters",
-    heading:
-      "LETTERS & IT HAPPENED TO ME – Title and letter-writer only needed (Simulacra: title and sender).",
+      "NAMES (Legendary and Fictional) — from mythology, fiction, folklore, legend, fantasy, religion and modern popular culture. Gods, deities, spirits and non-human entities; colloquial, regional, ethnic or tribal names for monsters.",
   },
   {
     key: "places",
     heading:
-      "PLACES – TOWN, COUNTY and COUNTRY – or significant geographical feature (lake, forest, mountain, river etc).",
+      "PLACES — TOWN, COUNTY/STATE/PROVINCE and COUNTRY only; significant geographical features (lake, forest, mountain, river); fixed, named locations (eg. Brooklands Racetrack, Chicago-O'Hare Airport).",
   },
   {
-    key: "behaviour",
+    key: "dates",
     heading:
-      "BEHAVIOUR – reactive words (verbs, nouns & adjectives, eg. fear, frighten, frightened). Attacks on / attacks by; manipulation by authorities; large-scale conflicts; fads, manias, obsessions; sleep & dream phenomena; conspiracies, delusions, panics, pranks; collectors.",
+      "DATES — year, month, day (when given); durations (eg. from 6 June 1978 to 12 January 1979); periods and eras (eg. the 1800s, the Tudor Period, New Kingdom Egypt, Meiji Era).",
+  },
+  {
+    key: "filmsTV",
+    heading: "SHORT ITEMS: FILMS & TV — title and date only needed.",
+  },
+  {
+    key: "letters",
+    heading:
+      "SHORT ITEMS: LETTERS & IT HAPPENED TO ME — title and correspondent name only.",
+  },
+  {
+    key: "reviews",
+    heading: "REVIEWS — title and author of the reviewed item.",
   },
 ];
 
@@ -69,7 +71,7 @@ export async function buildDocxBlob(
     new Paragraph({
       alignment: AlignmentType.CENTER,
       heading: HeadingLevel.HEADING_1,
-      children: [new TextRun({ text: `KEYWORD CATEGORIES — ${pageLabel}`, bold: true })],
+      children: [new TextRun({ text: `KEYWORD CATEGORIES, for ISSUE: ${pageLabel} — v.30c`, bold: true })],
     }),
   );
 
