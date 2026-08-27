@@ -9,13 +9,13 @@ export const Route = createFileRoute("/categories")({
       {
         name: "description",
         content:
-          "The ten Fortean Times indexing categories, with the rules and worked examples used to sort every keyword.",
+          "The ten Fortean Times indexing categories (v.30c), with the rules and worked examples used to sort every keyword.",
       },
       { property: "og:title", content: "Keyword Categories — FT Indexing Assistant" },
       {
         property: "og:description",
         content:
-          "Reference guide to the ten FT keyword categories, their rules and examples.",
+          "Reference guide to the ten FT keyword categories (v.30c), their rules and examples.",
       },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -32,66 +32,60 @@ const CATEGORY_GUIDE: Array<{
   {
     label: "1. Names of People & Peoples",
     rule:
-      "Surname first, comma, forenames, then title, profession or distinguishing detail in brackets. Keep surname prefixes (de, von, van de) with the surname. Include pseudonyms, affiliations, FT relationships, and peoples or nationalities.",
+      "Surname first, comma, forenames, then any pseudonym, affiliation, title, profession or distinguishing aspect in brackets (astronomer, ufo witness, editor, King, Pope, Sir, St., Dr., Prof. — with subject and/or institution, Duchess of). Use St. for Saint. Keep surname prefixes (de, von, van de) with the surname. Add 'FT correspondent' or 'FT contributor' where indicated. If only a surname with no qualification, use 'Mr' or 'Mrs' as appropriate — omit if uncertain. For Peoples include Nation/Tribe/Origin.",
     examples: [
       "Keel, John A. (fortean author)",
       "von Däniken, Erich (ancient astronaut theorist)",
       "Smith, Jenny (FT correspondent)",
-      "Yanomami (people)",
+      "Bloggs, Mr Joe",
+      "Navajo (people)",
+      "Ainu (people)",
     ],
   },
   {
-    label: "2. Topics & Case Names",
+    label: "2. Topics + Casenames",
     rule:
-      "Any subject discussed on the page, plus case names, customs, festivals and weather (including extremes and superlatives). All internal \"see\" referrals belong here.",
+      "A general category for observations, reports or discussions of any indexable object, subject, word or phrase mentioned on the page. Includes casenames; strange phenomena generally (ufology, earth mysteries, lost lands, coincidences & synchronicity, luck, falls of frogs/fish/stones, strange forces, time travel & time slips, weather anomalies, aerial booms & hums); unusual consciousness experiences (entity encounters, night paralysis, savants, altered states incl. entheogens, OOBEs & NDEs, sleep & dream phenomena, trance & hypnosis); cultural/sociological/psychological (witches, shamans, gurus, rituals & festivals, mind control & conspiracies, crime & punishment, cults); spiritual/mystical/folkloric (stigmata, levitation, miracles, ghosts & hauntings incl. poltergeists, omens & portents, spontaneous images in nature); psychology & parapsychology (telepathy, remote viewing, clairvoyance, psychokinesis, multiple personality, mass hysteria, prediction & prophecy, feats & austerities); human & animal behaviour (swarms & migration, attacks on & attacks by, animal intelligence, outsiders & imposters); cryptozoology & cryptobotany; out-of-place creatures & objects; exploration & new lands; reactive behaviour words (frighten, frightening, frightened); lists by title or subject; and the unclassified remainder. Very important: all internal \"see\" referrals go here.",
     examples: [
       "crop circles",
-      "Enfield poltergeist case",
-      "Up Helly Aa (festival)",
-      "hottest June on record",
+      "Bermuda Triangle (casename)",
+      "Skinwalker Ranch",
+      "Satanic Panic",
+      "time slips",
+      "coincidences & synchronicity",
+      "frightened, frightening",
       "fox fights eagle, see FT139p43",
     ],
   },
   {
-    label: "3. Physical, Psychological or Mystical Phenomena",
+    label: "3. Names of Organisations and Vessels",
     rule:
-      "Phenomena in a religious or folkloric context: apparitions, poltergeists, healing, levitation, visions, trance and possession, OOBEs and NDEs, luminous phenomena, feats of endurance, biological oddities and similar.",
-    examples: [
-      "apparitions",
-      "sleep paralysis (hag-ridden)",
-      "stigmata",
-      "spontaneous human combustion",
-      "near-death experience",
-    ],
-  },
-  {
-    label: "4. Organisations",
-    rule:
-      "Professions, appointments and specialities; religions, cults and movements; belief systems such as shamanism; societies, institutions and companies; ship names.",
+      "Professions and professional organisations; religions & sects; societies & institutions; philosophical, political or religious movements; companies & brand names; named vessels, spacecraft and submersibles (manned or unmanned).",
     examples: [
       "Society for Psychical Research",
       "Roman Catholic Church",
       "NASA",
-      "shamanism",
-      "SS Waratah (ship)",
+      "Mary Celeste, The (vessel)",
+      "Voyager II (spacecraft)",
     ],
   },
   {
-    label: "5. Scientific, Medical & Technical Terms",
+    label: "4. Scientific, Medical & Technical",
     rule:
-      "Disciplines, elements, stars, plants, processes, materials and forces; syndromes, illnesses, symptoms and treatments; scientific names of plants and animals (not pet names); brand names; animal and insect behaviour.",
+      "Terms from and references to any science, academic discipline or speciality (philosophical & theoretical sciences, empirical sciences, history & anthropology, astronomy & cosmology, medicine & biology, archaeology & palaeontology). Include common and scientific names of organisms, plants or animals — omit pet names. Include illnesses, elements, stars & planets, processes, materials, equipment, classifications.",
     examples: [
       "archaeoastronomy",
       "Capgras syndrome",
       "Panthera pardus",
       "magnetite",
       "Geiger counter",
+      "Betelgeuse (star)",
     ],
   },
   {
-    label: "6. Legendary & Fictional Names",
+    label: "5. Names (Legendary and Fictional)",
     rule:
-      "Legends and folklore; characters from fiction, film and books; monsters and unidentified creatures; deities, spirits and entities; colloquial names for any of these.",
+      "From mythology, fiction, folklore, legend, fantasy, any religion and modern popular culture. Names of gods, deities, spirits and non-human entities; colloquial, regional, ethnic or tribal names for monsters.",
     examples: [
       "Mothman",
       "Loch Ness monster (Nessie)",
@@ -101,41 +95,51 @@ const CATEGORY_GUIDE: Array<{
     ],
   },
   {
-    label: "7. Films & TV",
-    rule: "Title with the release or broadcast date only.",
+    label: "6. Places",
+    rule:
+      "Town, county/state/province (as appropriate) and country only — no street addresses. Significant geographical features (lake, forest, mountain, river). Fixed, named locations such as racetracks and airports.",
+    examples: [
+      "Halle, East Germany",
+      "Lyme Regis, Dorset",
+      "Loch Ness, Scotland",
+      "Mount Shasta, California",
+      "Brooklands Racetrack, Surrey",
+      "Chicago-O'Hare Airport, Illinois",
+    ],
+  },
+  {
+    label: "7. Dates",
+    rule:
+      "Year, month, day (when given); durations or extensions; periods and eras.",
+    examples: [
+      "6 June 1978",
+      "from 6 June 1978 to 12 January 1979",
+      "the 1800s",
+      "the Tudor Period",
+      "New Kingdom Egypt",
+      "Meiji Era",
+    ],
+  },
+  {
+    label: "8. Films & TV (Short Item)",
+    rule: "Title and date only needed.",
     examples: ["The Exorcist (1973)", "Quatermass and the Pit (1967)"],
   },
   {
-    label: "8. Letters & It Happened To Me",
+    label: "9. Letters & It Happened To Me (Short Item)",
     rule:
-      "Reader submissions, corrections, refutations and unusual experiences. Letters and IHTM: title and writer only. Simulacra: title and sender only — usually image related, so remember the asterisk.",
+      "Title and correspondent name only. Contents will be captured under the other categories as appropriate.",
     examples: [
       "Phantom hitchhiker — Alan Murdie",
       "Face in the tree stump — Sue Rowe*",
     ],
   },
   {
-    label: "9. Places",
-    rule:
-      "Town, county and country where given (no street addresses), plus significant geographical features such as lakes, forests, mountains and rivers. Compound forms are fine.",
+    label: "10. Reviews",
+    rule: "Title and author of the reviewed item.",
     examples: [
-      "Halle, East Germany",
-      "Lyme Regis, Dorset",
-      "Loch Ness, Scotland",
-      "Mount Shasta, California",
-    ],
-  },
-  {
-    label: "10. Behaviour",
-    rule:
-      "Reactive verbs, nouns and adjectives; acts of aggression recorded in both directions; manipulation by authorities; conflicts; fads and manias; sleep and dream phenomena; conspiracies, delusions, panics, pranks; collectors.",
-    examples: [
-      "fear, frightened",
-      "attack on: postman",
-      "attack by: dog",
-      "manipulation by: government",
-      "tulip mania",
-      "conspiracy theories",
+      "The Mothman Prophecies — John A. Keel",
+      "The Day After Roswell — Philip J. Corso",
     ],
   },
 ];
@@ -156,12 +160,13 @@ function CategoriesPage() {
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
             Every indexable term on a page is sorted into one of these ten
-            categories. Items that have an associated image (photo,
-            illustration, simulacrum) take an asterisk <span className="font-mono">*</span> at
-            the end of the entry.
+            categories. Not all headings will appear on the same page — but
+            combinations of them will. Items that have an associated image
+            (photo, illustration, simulacrum) take an asterisk{" "}
+            <span className="font-mono">*</span> at the end of the entry.
           </p>
           <p className="mt-3 text-sm text-muted-foreground">
-            <span className="font-semibold text-foreground">Version:</span> N/A
+            <span className="font-semibold text-foreground">Version:</span> v.30c
           </p>
         </div>
       </header>
