@@ -132,6 +132,8 @@ function IndexerPage() {
   const [pendingEvent, setPendingEvent] = useState<FeedbackEvent | null>(null);
   const [reasonDraft, setReasonDraft] = useState("");
 
+  const [dragActive, setDragActive] = useState(false);
+
   // Load persisted feedback + toggle on mount
   useEffect(() => {
     setAskWhy(loadAskWhy());
@@ -284,7 +286,27 @@ function IndexerPage() {
           </div>
         </Card>
 
-        <Card className="p-6">
+        <Card
+          className={cn("p-6 transition-colors", dragActive && "border-primary bg-primary/5")}
+          onDragOver={(e) => {
+            e.preventDefault();
+            setDragActive(true);
+          }}
+          onDragLeave={(e) => {
+            e.preventDefault();
+            setDragActive(false);
+          }}
+          onDrop={(e) => {
+            e.preventDefault();
+            setDragActive(false);
+            const dropped = e.dataTransfer.files?.[0];
+            if (dropped && dropped.type === "application/pdf") {
+              setFile(dropped);
+            } else if (dropped) {
+              toast.error("Please drop a PDF file");
+            }
+          }}
+        >
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
             <div className="flex-1">
               <label className="text-sm font-medium mb-2 block">
@@ -294,7 +316,7 @@ function IndexerPage() {
                 <label className="flex-1 flex items-center gap-2 rounded-md border border-dashed border-input px-3 py-2 cursor-pointer hover:bg-accent">
                   <Upload className="h-4 w-4" />
                   <span className="text-sm truncate">
-                    {file ? file.name : "Choose a PDF file…"}
+                    {file ? file.name : "Choose or drop a PDF file…"}
                   </span>
                   <input
                     type="file"
