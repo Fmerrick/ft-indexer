@@ -6,31 +6,31 @@ const SECTIONS: Array<{
   category: string;
 }> = [
   { key: "people", heading: "Names of People &amp; Peoples", category: "Names" },
-  { key: "topics", heading: "Topics &amp; Case Names", category: "Topics" },
+  { key: "topics", heading: "Topics + Casenames", category: "Topics" },
   {
-    key: "phenomena",
-    heading: "Physical, Psychological &amp; Mystical Phenomena",
-    category: "Phenomena",
+    key: "organisations",
+    heading: "Names of Organisations and Vessels",
+    category: "Organisations",
   },
-  { key: "organisations", heading: "Organisations", category: "Organisations" },
   {
     key: "science",
-    heading: "Scientific, Medical &amp; Technical Terms",
+    heading: "Scientific, Medical &amp; Technical",
     category: "Scientific",
   },
   {
     key: "fictional",
-    heading: "Legendary &amp; Fictional Names",
+    heading: "Names (Legendary and Fictional)",
     category: "Fictive/Legendary",
   },
-  { key: "filmsTV", heading: "Films &amp; TV References", category: "Films &amp; TV" },
+  { key: "places", heading: "Places", category: "Places" },
+  { key: "dates", heading: "Dates", category: "Dates" },
+  { key: "filmsTV", heading: "Films &amp; TV", category: "Films &amp; TV" },
   {
     key: "letters",
     heading: "Letters &amp; It Happened To Me",
     category: "Letters &amp; IHTM",
   },
-  { key: "places", heading: "Places", category: "Places" },
-  { key: "behaviour", heading: "Behaviour", category: "Behaviour" },
+  { key: "reviews", heading: "Reviews", category: "Reviews" },
 ];
 
 function esc(s: string): string {

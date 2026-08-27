@@ -68,15 +68,15 @@ type CategoryKey = keyof ExtractionResult;
 
 const CATEGORIES: Array<{ key: CategoryKey; label: string; hint: string }> = [
   { key: "people", label: "Names of People & Peoples", hint: "Surname, forenames (title/role/affiliation)" },
-  { key: "topics", label: "Topics & Case Names", hint: "Subjects, cases, customs, festivals, weather, 'see' refs" },
-  { key: "phenomena", label: "Physical / Psychological / Mystical Phenomena", hint: "Apparitions, poltergeists, visions, trance" },
-  { key: "organisations", label: "Organisations", hint: "Professions, religions, societies, companies, ships" },
-  { key: "science", label: "Scientific / Medical / Technical", hint: "Disciplines, illnesses, species, materials, brands" },
-  { key: "fictional", label: "Legendary & Fictional", hint: "Monsters, deities, spirits, folklore" },
-  { key: "filmsTV", label: "Films & TV", hint: "Title (date)" },
-  { key: "letters", label: "Letters & It Happened To Me", hint: "Title — writer" },
-  { key: "places", label: "Places", hint: "Town, county, country, features" },
-  { key: "behaviour", label: "Behaviour", hint: "Attacks by/on, manias, conspiracies, dreams" },
+  { key: "topics", label: "Topics + Casenames", hint: "Subjects, casenames, phenomena, behaviour words, 'see' refs" },
+  { key: "organisations", label: "Organisations & Vessels", hint: "Professions, religions, societies, companies, named vessels" },
+  { key: "science", label: "Scientific / Medical / Technical", hint: "Disciplines, illnesses, species, materials, equipment" },
+  { key: "fictional", label: "Legendary & Fictional", hint: "Monsters, deities, spirits, folklore, pop culture" },
+  { key: "places", label: "Places", hint: "Town, county/state, country, features, named locations" },
+  { key: "dates", label: "Dates", hint: "Years, days, durations, periods & eras" },
+  { key: "filmsTV", label: "Films & TV", hint: "Title (date) only" },
+  { key: "letters", label: "Letters & It Happened To Me", hint: "Title — correspondent" },
+  { key: "reviews", label: "Reviews", hint: "Title — author of reviewed item" },
 ];
 
 type ExportFormat = "html" | "docx";
