@@ -51,7 +51,6 @@ const SECTIONS: Array<{ key: keyof ExtractionResult; heading: string }> = [
   {
     key: "letters",
     heading:
-    heading:
       "LETTERS & IT HAPPENED TO ME — title and correspondent name only.",
   },
   {
