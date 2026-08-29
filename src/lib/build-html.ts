@@ -1,4 +1,6 @@
 import type { ExtractionResult } from "./extract.functions";
+import { formatPageRef } from "./format-page";
+
 
 const SECTIONS: Array<{
   key: keyof ExtractionResult;
@@ -52,7 +54,8 @@ export function buildIndexHtml(
     const rows = [...items]
       .sort((a, b) => a.text.localeCompare(b.text, "en"))
       .map((item) => {
-        const where = item.page ? `p${esc(item.page)}` : pageLabel ? esc(pageLabel) : "";
+        const where = item.page ? formatPageRef(item.page) : pageLabel ? esc(pageLabel) : "";
+
         const detail = [where, esc(item.reason || item.context || "")]
           .filter(Boolean)
           .join(" — ");

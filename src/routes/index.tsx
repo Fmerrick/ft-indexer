@@ -27,6 +27,8 @@ import {
 } from "@/lib/extract.functions";
 import { buildDocxBlob } from "@/lib/build-docx";
 import { buildHtmlBlob } from "@/lib/build-html";
+import { formatPageRef } from "@/lib/format-page";
+
 
 import {
   diffCategory,
@@ -600,9 +602,10 @@ function CategoryCard({
               />
               {item.page ? (
                 <span className="shrink-0 rounded bg-background/70 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
-                  p{item.page}
+                  {formatPageRef(item.page)}
                 </span>
               ) : null}
+
               <input
                 value={item.text}
                 onChange={(e) => updateAt(i, { text: e.target.value })}
@@ -631,9 +634,10 @@ function CategoryCard({
                       <span className="font-medium">{item.confidence}</span>
                       {item.page ? (
                         <>
-                          {" "}· Page: <span className="font-medium">{item.page}</span>
+                          {" "}· Page: <span className="font-medium">{formatPageRef(item.page)}</span>
                         </>
                       ) : null}
+
                     </DialogDescription>
                   </DialogHeader>
                   <div className="space-y-4 text-sm">

@@ -35,8 +35,9 @@ The user will send you a PDF that may contain MANY pages. Process EVERY page in 
 
 PAGE NUMBERS:
 - Look for the printed page number, usually at the bottom (sometimes the top) of each page, and use it for the "page" field of every item found on that page.
-- Return it exactly as printed (e.g. "6", "43"). If a running head gives an issue number (e.g. "FT444"), you may return "FT444p43".
-- If no page number is printed on that page, return the PDF sheet position as "sheet 3".
+- Return it as a two-digit reference with a capital P prefix (e.g. "P08", "P12", "P03").
+- If no page number is printed on that page, return the PDF sheet position as "S03" (two digits with an S prefix).
+
 
 GLOBAL RULES:
 - Every item must record which page it came from.
