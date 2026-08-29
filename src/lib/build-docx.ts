@@ -95,9 +95,10 @@ export async function buildDocxBlob(
           new Paragraph({
             bullet: { level: 0 },
             children: [
-              new TextRun(item.page ? `${item.text} — p${item.page}` : item.text),
+              new TextRun(item.page ? `${item.text} — ${formatPageRef(item.page)}` : item.text),
             ],
           }),
+
         );
       }
     }
