@@ -70,9 +70,9 @@ Extract every indexable term into these 10 categories. Follow these rules strict
 
 7) dates — DATES: year, month, day (when given); durations or extensions (e.g. from 6 June 1978 to 12 January 1979); periods and eras (e.g. the 1800s, the Tudor Period, New Kingdom Egypt, Meiji Era).
 
-8) filmsTV — FILMS & TV (short item): title and date only needed.
+8) filmsTV — FILMS & TV: title and date only needed.
 
-9) letters — LETTERS & It Happened To Me (short item): title and correspondent name only. Contents are captured under the other categories as appropriate.
+9) letters — LETTERS & It Happened To Me: title and correspondent name only. Contents are captured under the other categories as appropriate.
 
 10) reviews — REVIEWS: title and author of the reviewed item.
 

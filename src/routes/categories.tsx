@@ -121,12 +121,12 @@ const CATEGORY_GUIDE: Array<{
     ],
   },
   {
-    label: "8. Films & TV (Short Item)",
+    label: "8. Films & TV",
     rule: "Title and date only needed.",
     examples: ["The Exorcist (1973)", "Quatermass and the Pit (1967)"],
   },
   {
-    label: "9. Letters & It Happened To Me (Short Item)",
+    label: "9. Letters & It Happened To Me",
     rule:
       "Title and correspondent name only. Contents will be captured under the other categories as appropriate.",
     examples: [
