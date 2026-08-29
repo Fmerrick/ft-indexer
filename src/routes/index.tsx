@@ -27,6 +27,8 @@ import {
 } from "@/lib/extract.functions";
 import { buildDocxBlob } from "@/lib/build-docx";
 import { buildHtmlBlob } from "@/lib/build-html";
+import { formatPageRef } from "@/lib/format-page";
+
 
 import {
   diffCategory,

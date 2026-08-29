@@ -7,6 +7,8 @@ import {
   AlignmentType,
 } from "docx";
 import type { ExtractionResult } from "./extract.functions";
+import { formatPageRef } from "./format-page";
+
 
 const SECTIONS: Array<{ key: keyof ExtractionResult; heading: string }> = [
   {

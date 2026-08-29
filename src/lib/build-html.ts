@@ -1,4 +1,6 @@
 import type { ExtractionResult } from "./extract.functions";
+import { formatPageRef } from "./format-page";
+
 
 const SECTIONS: Array<{
   key: keyof ExtractionResult;
