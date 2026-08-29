@@ -46,12 +46,13 @@ const SECTIONS: Array<{ key: keyof ExtractionResult; heading: string }> = [
   },
   {
     key: "filmsTV",
-    heading: "SHORT ITEMS: FILMS & TV — title and date only needed.",
+    heading: "FILMS & TV — title and date only needed.",
   },
   {
     key: "letters",
     heading:
-      "SHORT ITEMS: LETTERS & IT HAPPENED TO ME — title and correspondent name only.",
+    heading:
+      "LETTERS & IT HAPPENED TO ME — title and correspondent name only.",
   },
   {
     key: "reviews",
