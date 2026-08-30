@@ -44,7 +44,25 @@ GLOBAL RULES:
 - Index any significant, related, indexable subject (word or phrase) mentioned on the page.
 - If an item on this page has an associated image (photo, illustration, simulacrum), append an asterisk "*" to the end of that item's text.
 
+OVER-INDEX, DO NOT UNDER-INDEX. A human editor will delete anything unwanted, so it is far worse to miss a term than to include a marginal one. Aim for a rich, generous index of every page. In particular, index (in addition to proper names):
+- Common nouns and generic terms that carry the story: hangover, compound, robes, burqa, pharmacy, tourists, followers, police, federal agencies, school-student, community, sect, doctrine, asylum, relocation, kidnapping, beatings, isolation, enslavement, sexual abuse, anti-cult legislation.
+- Reactive behaviour words — verbs, nouns and adjectives describing reactions and manner (hostile, menacing, vicious, frightened, heavy drinking) — each as its own topic entry.
+- Causes and modes of events: death (by falling), death (by drowning), deaths (of mother & children).
+- Processes, techniques, conditions and superlatives in the science category: plating (industrial process), radio-carbon dating, permafrost, cancer (cause of), organs (internal, damage to), pregnant, world's oldest.
+- Generic collective/organisational nouns in the organisations category: rabbi, sect, community (religious), community (cultish), orthodox (ultra Jewish), followers, tourists, police (US), federal agencies (US), movements such as anti-Zionism, and religion/sect adjectives (Jewish (sects), Judaist (sects)).
+- Periods and eras alongside exact dates: Ice Age, 41,300 years ago.
+- Cross-references written in full, e.g. "for more on cult captives see FT386:4, 389:16-17".
+A typical single magazine page should yield dozens of entries across the categories, not a handful.
+
+PARENTHETICAL CONTEXT — add a short qualifier in parentheses to as many entries as possible so a reader knows what the entry refers to. Keep it to a few words, never a sentence. Examples:
+- Dates: "22 December 2019 (Detroit slime discovered)", "Ice Age (frozen lemming's era)".
+- Places: "Altos del Terron, Panama (cult deaths)".
+- Topics: "frozen (lemming)", "thigh bones (broken)", "isolation (in cult captivity)", "Torah (Jewish scripture)".
+- Science: "chicken (hostile)", "plating (industrial process)".
+Do not add parentheses when the entry is already self-explanatory, and never repeat the same words twice.
+
 Extract every indexable term into these 10 categories. Follow these rules strictly:
+
 
 1) people — NAMES of PEOPLE & PEOPLES. Surname first, comma, forenames, then any pseudonym, affiliation, title, profession or distinguishing aspect in brackets (e.g. astronomer, ufo witness, editor, King, Pope, Sir, St., Dr., Prof., Duchess of). For Prof., mention the subject and/or institution. Use "St." for Saint. Keep surname prefixes (de, da, de la, el, le, la, von, van de) with the surname. Add "FT correspondent" or "FT contributor" where indicated. If there is only a surname with no qualification, use "Mr" or "Mrs" as appropriate; if uncertain, omit it. For Peoples include Nation/Tribe/Origin (e.g. Navajo, Celt, Ainu, American).
 
