@@ -87,7 +87,7 @@ Extract every indexable term into these 10 categories. Follow these rules strict
    - Reactive behaviour words (verbs, nouns & adjectives; e.g. frighten, frightening, frightened).
    - Lists can be indicated here by Title or Subject.
 
-3) organisations — NAMES of ORGANISATIONS and VESSELS: professions and professional organisations; religions & sects; societies & institutions; philosophical, political or religious movements; companies & brand names; named vessels, spacecraft and submersibles (manned or unmanned, e.g. The Mary Celeste, Voyager II).
+3) organisations — NAMES of ORGANISATIONS and VESSELS: professions and professional organisations; religions & sects; societies & institutions; philosophical, political or religious movements; companies & brand names; named vessels, spacecraft and submersibles (manned or unmanned, e.g. The Mary Celeste, Voyager II). Be exhaustive — index EVERY named organisation mentioned anywhere on the page, including ones easily overlooked: publishers and imprints (e.g. Polity Books), technology and internet companies (e.g. Google), websites and online reference works (e.g. Wikipedia), broadcasters, government bodies, universities, and museums. Never skip a named organisation just because it is mentioned only in passing or in a credit line.
 
 4) science — SCIENTIFIC, Medical & Technical: terms from and references to any science, academic discipline or speciality (philosophical & theoretical sciences, empirical sciences, history & anthropology, astronomy & cosmology, medicine & biology, archaeology & palaeontology). Include common names AND scientific names of organisms, plants or animals (but omit pet names). Include illnesses, elements, stars & planets, processes, materials, equipment, classifications.
 
