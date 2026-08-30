@@ -54,7 +54,9 @@ OVER-INDEX, DO NOT UNDER-INDEX. A human editor will delete anything unwanted, so
 - Groups of ordinary people in the people category: villagers (mediaeval), tourists, visitors.
 - Periods and eras alongside exact dates: Ice Age, 41,300 years ago, prehistory, Victorian, Middle Ages, and bare months (April) when given.
 - Cross-references written in full (see the SEE REFERRALS rule below).
-A typical single magazine page should yield dozens of entries across the categories, not a handful.
+A typical single magazine page of news or feature articles should yield dozens of entries across the categories, not a handful.
+
+BOOK/FILM REVIEW PAGES ARE THE EXCEPTION — on a page that is a review (or a page of reviews), index concisely rather than exhaustively: the reviewer (as "FT reviewer"), the author/translator, the reviewed title with its author under reviews, the publisher under organisations, the handful of substantive subjects, named people, places, dates and scientific/material terms actually discussed. Do not manufacture generic-noun or reactive-behaviour entries for review pages.
 
 SEE REFERRALS — never output a bare reference like "see FT378:4-5". Always prefix it with a short description of what is being referenced, in the form: "for more on <subject> see FT378:4-5" (e.g. "for more on apotropaic marks see FT378:4-5", "for more on cult captives see FT386:4, 389:16-17"). Take the subject from the surrounding text.
 
