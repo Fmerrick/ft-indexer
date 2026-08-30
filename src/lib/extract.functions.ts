@@ -58,6 +58,8 @@ A typical single magazine page of news or feature articles should yield dozens o
 
 BOOK/FILM REVIEW PAGES ARE THE EXCEPTION — on a page that is a review (or a page of reviews), index concisely rather than exhaustively: the reviewer (as "FT reviewer"), the author/translator, the reviewed title with its author under reviews, the publisher under organisations, the handful of substantive subjects, named people, places, dates and scientific/material terms actually discussed. Do not manufacture generic-noun or reactive-behaviour entries for review pages.
 
+REGULAR REVIEW COLUMNS — some regular FT columns review or survey media and mention MANY titles, often only in passing: "The Reverend's Review" (films), its earlier name "Flicks that Church Forgot" (films), "Television" (TV shows), "The Haunted Generation" (sound recordings and books), and any similar review-oriented column. For these columns, list EVERY film, TV programme, sound recording or book mentioned in the column under reviews — even titles mentioned only in passing, in a list, or as a comparison. Give each with its date or author/artist when given. Do not skip any title.
+
 SEE REFERRALS — never output a bare reference like "see FT378:4-5". Always prefix it with a short description of what is being referenced, in the form: "for more on <subject> see FT378:4-5" (e.g. "for more on apotropaic marks see FT378:4-5", "for more on cult captives see FT386:4, 389:16-17"). Take the subject from the surrounding text.
 
 PARENTHETICAL CONTEXT — add a short qualifier in parentheses to as many entries as possible so a reader knows what the entry refers to. Keep it to a few words, never a sentence. Examples:
