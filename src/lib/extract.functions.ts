@@ -49,17 +49,23 @@ OVER-INDEX, DO NOT UNDER-INDEX. A human editor will delete anything unwanted, so
 - Reactive behaviour words — verbs, nouns and adjectives describing reactions and manner (hostile, menacing, vicious, frightened, heavy drinking) — each as its own topic entry.
 - Causes and modes of events: death (by falling), death (by drowning), deaths (of mother & children).
 - Processes, techniques, conditions and superlatives in the science category: plating (industrial process), radio-carbon dating, permafrost, cancer (cause of), organs (internal, damage to), pregnant, world's oldest.
-- Generic collective/organisational nouns in the organisations category: rabbi, sect, community (religious), community (cultish), orthodox (ultra Jewish), followers, tourists, police (US), federal agencies (US), movements such as anti-Zionism, and religion/sect adjectives (Jewish (sects), Judaist (sects)).
-- Periods and eras alongside exact dates: Ice Age, 41,300 years ago.
-- Cross-references written in full, e.g. "for more on cult captives see FT386:4, 389:16-17".
+- Generic collective/organisational nouns in the organisations category: rabbi, sect, community (religious), community (cultish), orthodox (ultra Jewish), followers, tourists, police (US), federal agencies (US), archæologists, prehistorians, excavators (Victorian), cavers, witches, movements such as anti-Zionism, and religion/sect adjectives (Jewish (sects), Judaist (sects)).
+- Physical settings, materials and landscape features: cave (entrances), cliff, gorge, limestone, escarpment, lamp (on caving hard hat), hat (hard, cavers).
+- Groups of ordinary people in the people category: villagers (mediaeval), tourists, visitors.
+- Periods and eras alongside exact dates: Ice Age, 41,300 years ago, prehistory, Victorian, Middle Ages, and bare months (April) when given.
+- Cross-references written in full (see the SEE REFERRALS rule below).
 A typical single magazine page should yield dozens of entries across the categories, not a handful.
 
+SEE REFERRALS — never output a bare reference like "see FT378:4-5". Always prefix it with a short description of what is being referenced, in the form: "for more on <subject> see FT378:4-5" (e.g. "for more on apotropaic marks see FT378:4-5", "for more on cult captives see FT386:4, 389:16-17"). Take the subject from the surrounding text.
+
 PARENTHETICAL CONTEXT — add a short qualifier in parentheses to as many entries as possible so a reader knows what the entry refers to. Keep it to a few words, never a sentence. Examples:
-- Dates: "22 December 2019 (Detroit slime discovered)", "Ice Age (frozen lemming's era)".
+- Dates: "1505 (date carved in Creswell cave)", "2019 (visit to Creswell cave)", "40-28,000 yrs ago (British cave art)".
 - Places: "Altos del Terron, Panama (cult deaths)".
-- Topics: "frozen (lemming)", "thigh bones (broken)", "isolation (in cult captivity)", "Torah (Jewish scripture)".
-- Science: "chicken (hostile)", "plating (industrial process)".
+- Topics: "frozen (lemming)", "caves (dark)", "luck (discovery by)", "engravings (cave art)", "isolation (in cult captivity)".
+- Science: "chicken (hostile)", "stag (in British cave art)", "Ice Age (last Great)".
+- Fictional: "Hell (entrance to)".
 Do not add parentheses when the entry is already self-explanatory, and never repeat the same words twice.
+
 
 Extract every indexable term into these 10 categories. Follow these rules strictly:
 
