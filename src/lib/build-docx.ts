@@ -43,7 +43,7 @@ const SECTIONS: Array<{ key: keyof ExtractionResult; heading: string }> = [
   {
     key: "dates",
     heading:
-      "DATES — year, month, day (when given); durations (eg. from 6 June 1978 to 12 January 1979); periods and eras (eg. the 1800s, the Tudor Period, New Kingdom Egypt, Meiji Era).",
+      "DATES & TIMES — year, month, day (when given); durations (eg. from 6 June 1978 to 12 January 1979); periods and eras (eg. the 1800s, the Tudor Period, New Kingdom Egypt, Meiji Era); times of day (eg. dawn, dusk, midnight, 3 AM) and vague time expressions.",
   },
   {
     key: "filmsTV",
