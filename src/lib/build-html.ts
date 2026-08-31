@@ -1,5 +1,4 @@
 import type { ExtractionResult } from "./extract.functions";
-import { formatPageRef } from "./format-page";
 
 
 const SECTIONS: Array<{
@@ -54,18 +53,14 @@ export function buildIndexHtml(
     const rows = [...items]
       .sort((a, b) => a.text.localeCompare(b.text, "en"))
       .map((item) => {
-        const where = item.page ? formatPageRef(item.page) : pageLabel ? esc(pageLabel) : "";
-
-        const detail = [where, esc(item.reason || item.context || "")]
-          .filter(Boolean)
-          .join(" — ");
+        const detail = esc(item.reason || item.context || "");
         return `<tr><td>${esc(item.text)}</td><td>${section.category}</td><td>${detail}</td></tr>`;
       })
       .join("\n");
     return `<!-- ═══════════════════ ${section.category.toUpperCase()} ═══════════════════ -->
 <h2>${section.heading}</h2>
 <table>
-<tr><th>Entry Name</th><th>Category</th><th>Page / Section</th></tr>
+<tr><th>Entry Name</th><th>Category</th><th>Notes</th></tr>
 
 ${rows}
 </table>

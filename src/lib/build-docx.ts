@@ -7,7 +7,6 @@ import {
   AlignmentType,
 } from "docx";
 import type { ExtractionResult } from "./extract.functions";
-import { formatPageRef } from "./format-page";
 
 
 const SECTIONS: Array<{ key: keyof ExtractionResult; heading: string }> = [
@@ -24,7 +23,7 @@ const SECTIONS: Array<{ key: keyof ExtractionResult; heading: string }> = [
   {
     key: "organisations",
     heading:
-      "NAMES of ORGANISATIONS and VESSELS — professions & professional organisations, religions & sects, societies & institutions, movements, companies & brand names, named vessels, spacecraft & submersibles (eg. The Mary Celeste, Voyager II).",
+      "NAMES of ORGANISATIONS and VESSELS — occupations of every kind (not just professions) & occupational organisations, religions & sects, societies & institutions, movements, companies & brand names, named vessels, spacecraft & submersibles (eg. The Mary Celeste, Voyager II).",
   },
   {
     key: "science",
@@ -95,7 +94,7 @@ export async function buildDocxBlob(
           new Paragraph({
             bullet: { level: 0 },
             children: [
-              new TextRun(item.page ? `${item.text} — ${formatPageRef(item.page)}` : item.text),
+              new TextRun(item.text),
             ],
           }),
 
