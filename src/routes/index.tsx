@@ -257,7 +257,7 @@ function IndexerPage() {
           <p className="mt-2 text-sm text-muted-foreground">
             Upload a page or a multi-page PDF. The AI reads every page, records
             the printed page number, sorts every indexable term into the ten FT
-            categories, and marks each with a confidence rating. Edit anything, then export as HTML (default) or .docx.
+            categories, and marks each with a confidence rating. Edit anything, then export as .docx (default) or HTML.
           </p>
           <Link
             to="/categories"
