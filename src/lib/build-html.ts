@@ -1,5 +1,4 @@
 import type { ExtractionResult } from "./extract.functions";
-import { formatPageRef } from "./format-page";
 
 
 const SECTIONS: Array<{
@@ -61,7 +60,7 @@ export function buildIndexHtml(
     return `<!-- ═══════════════════ ${section.category.toUpperCase()} ═══════════════════ -->
 <h2>${section.heading}</h2>
 <table>
-<tr><th>Entry Name</th><th>Category</th><th>Page / Section</th></tr>
+<tr><th>Entry Name</th><th>Category</th><th>Notes</th></tr>
 
 ${rows}
 </table>
