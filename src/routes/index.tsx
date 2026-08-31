@@ -129,7 +129,7 @@ function IndexerPage() {
   const [file, setFile] = useState<File | null>(null);
   const [pageLabel, setPageLabel] = useState("");
   const [loading, setLoading] = useState(false);
-  const [format, setFormat] = useState<ExportFormat>("html");
+  const [format, setFormat] = useState<ExportFormat>("docx");
 
   const [result, setResult] = useState<ExtractionResult | null>(null);
 
