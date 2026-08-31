@@ -57,7 +57,16 @@ OVER-INDEX, DO NOT UNDER-INDEX. A human editor will delete anything unwanted, so
 - Groups of ordinary people in the people category: villagers (mediaeval), tourists, visitors.
 - Periods and eras alongside exact dates: Ice Age, 41,300 years ago, prehistory, Victorian, Middle Ages, and bare months (April) when given.
 - Cross-references written in full (see the SEE REFERRALS rule below).
-A typical single magazine page of news or feature articles should yield dozens of entries across the categories, not a handful.
+- Occupation and role nouns belong in ORGANISATIONS, never in people: miners, farmers, apprentices, gardeners (novice), allotment holders. Only named individuals and nations/peoples/religious groups (Catholics (Irish), Protestants (English & Scottish)) go in people.
+- Everyday objects, structures and materials mentioned in passing are indexable topics: bottles, tin cans (as bird scarers), cloche (glass enclosure for plants), cree (shelter for racing pigeons), bird scarers.
+- Index the SAME subject from several angles as separate entries, e.g. "folklore (of allotments)" and "folklore (of gardening)"; "waxing (of Moon)" and "waning (of Moon, best time to mow lawn)".
+- Attitudes, mental states and social behaviour are topics: gullibility (of novices), joke (on gardening novices), magical (thinking), rituals (of gardeners), suspicion (of new plants), survival (strategy), wisdom (in collective unconscious), hazards (of gardening).
+- Quoted maxims and sayings: give the quotation in quote marks with its attribution in parentheses, e.g. "As above, so below" (philosophical maxim; attrib. Hermes Trismegistus) — and also index the person quoted (Hermes Trismegistus) under people.
+- Generic non-human entities go under fictional even when unnamed: God (deity), evil spirits (generally).
+- Science must include the plain everyday plant, animal, body, weather, soil and process words too, not only the Latin-name entries: pigeons, leeks, seeds (vegetable), soil (warmth of), weeds, lawn, weather (British), buttocks (bare, test of soil warmth), planting (critical timing of), auspicious (times for planting), astrology (in gardening), gravity, light (levels), water, plant tissues, unconscious (collective).
+- Vague time expressions belong in dates: "olden times", "nowadays", "the old days".
+- Every entry that is not fully self-explanatory should carry a parenthetical qualifier — including places, e.g. "Boiler Road (local landmark, gardener's reference)".
+A typical single magazine page of news or feature articles should yield dozens of entries across the categories, not a handful — a feature page will often yield 60–100 entries in total.
 
 BOOK/FILM REVIEW PAGES ARE THE EXCEPTION — on a page that is a review (or a page of reviews), index concisely rather than exhaustively: the reviewer (as "FT reviewer"), the author/translator, the reviewed title with its author under reviews, the publisher under organisations, the handful of substantive subjects, named people, places, dates and scientific/material terms actually discussed. Do not manufacture generic-noun or reactive-behaviour entries for review pages.
 
