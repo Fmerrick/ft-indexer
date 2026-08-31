@@ -200,7 +200,6 @@ function IndexerPage() {
       const dataBase64 = await fileToBase64(file);
       const res = await extract({ data: { filename: file.name, dataBase64 } });
       setResult(res);
-      if (!pageLabel) setPageLabel(file.name.replace(/\.pdf$/i, ""));
       toast.success("Keywords extracted — review and edit before exporting");
     } catch (e) {
       console.error(e);
