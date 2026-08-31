@@ -75,7 +75,11 @@ const CATEGORIES: Array<{ key: CategoryKey; label: string; hint: string }> = [
   { key: "science", label: "Scientific / Medical / Technical", hint: "Disciplines, illnesses, species, materials, equipment" },
   { key: "fictional", label: "Legendary & Fictional", hint: "Monsters, deities, spirits, folklore, pop culture" },
   { key: "places", label: "Places", hint: "Town, county/state, country, features, named locations" },
-  { key: "dates", label: "Dates", hint: "Years, days, durations, periods & eras" },
+  {
+    key: "dates",
+    label: "Dates & Times",
+    hint: "Years, days, durations, periods, eras & times of day",
+  },
   { key: "filmsTV", label: "Films & TV", hint: "Title (date) only" },
   { key: "letters", label: "Letters & It Happened To Me", hint: "Title — correspondent" },
   { key: "reviews", label: "Reviews", hint: "Title — author of reviewed item" },

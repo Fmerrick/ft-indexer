@@ -24,7 +24,7 @@ const SECTIONS: Array<{
     category: "Fictive/Legendary",
   },
   { key: "places", heading: "Places", category: "Places" },
-  { key: "dates", heading: "Dates", category: "Dates" },
+  { key: "dates", heading: "Dates &amp; Times", category: "Dates &amp; Times" },
   { key: "filmsTV", heading: "Films &amp; TV", category: "Films &amp; TV" },
   {
     key: "letters",
