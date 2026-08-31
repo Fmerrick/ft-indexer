@@ -108,9 +108,9 @@ const CATEGORY_GUIDE: Array<{
     ],
   },
   {
-    label: "7. Dates",
+    label: "7. Dates & Times",
     rule:
-      "Year, month, day (when given); durations or extensions; periods and eras.",
+      "Year, month, day (when given); durations or extensions; periods and eras; times of day and vague time expressions.",
     examples: [
       "6 June 1978",
       "from 6 June 1978 to 12 January 1979",
@@ -118,6 +118,11 @@ const CATEGORY_GUIDE: Array<{
       "the Tudor Period",
       "New Kingdom Egypt",
       "Meiji Era",
+      "dusk (encounter with 'unearthly' man, Kent)",
+      "dawn",
+      "midnight",
+      "3 AM",
+      "olden times",
     ],
   },
   {
