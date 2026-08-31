@@ -54,11 +54,7 @@ export function buildIndexHtml(
     const rows = [...items]
       .sort((a, b) => a.text.localeCompare(b.text, "en"))
       .map((item) => {
-        const where = item.page ? formatPageRef(item.page) : pageLabel ? esc(pageLabel) : "";
-
-        const detail = [where, esc(item.reason || item.context || "")]
-          .filter(Boolean)
-          .join(" — ");
+        const detail = esc(item.reason || item.context || "");
         return `<tr><td>${esc(item.text)}</td><td>${section.category}</td><td>${detail}</td></tr>`;
       })
       .join("\n");
