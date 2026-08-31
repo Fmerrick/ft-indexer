@@ -76,11 +76,12 @@ REGULAR REVIEW COLUMNS — some regular FT columns review or survey media and me
 SEE REFERRALS — never output a bare reference like "see FT378:4-5". Always prefix it with a short description of what is being referenced, in the form: "for more on <subject> see FT378:4-5" (e.g. "for more on apotropaic marks see FT378:4-5", "for more on cult captives see FT386:4, 389:16-17"). Take the subject from the surrounding text.
 
 PARENTHETICAL CONTEXT — add a short qualifier in parentheses to as many entries as possible so a reader knows what the entry refers to. Keep it to a few words, never a sentence. Examples:
-- Dates: "1505 (date carved in Creswell cave)", "2019 (visit to Creswell cave)", "40-28,000 yrs ago (British cave art)".
+- Dates: "1505 (date carved in Creswell cave)", "2019 (visit to Creswell cave)", "40-28,000 yrs ago (British cave art)", "Dusk (time of cult arrival)".
 - Places: "Altos del Terron, Panama (cult deaths)".
 - Topics: "frozen (lemming)", "caves (dark)", "luck (discovery by)", "engravings (cave art)", "isolation (in cult captivity)".
 - Science: "chicken (hostile)", "stag (in British cave art)", "Ice Age (last Great)".
 - Fictional: "Hell (entrance to)".
+Whenever a date, era or time of day appears, always add a parenthetical note explaining what event or subject it relates to (e.g. "2019 (excavation date)", "Victorian (era of photograph)", "midnight (time of incident)"). Do not leave a bare year or time.
 Do not add parentheses when the entry is already self-explanatory, and never repeat the same words twice.
 
 
