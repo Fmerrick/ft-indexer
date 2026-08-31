@@ -109,7 +109,7 @@ Extract every indexable term into these 10 categories. Follow these rules strict
 
 6) places — PLACES: TOWN, COUNTY/STATE/PROVINCE (as appropriate) and COUNTRY only; or significant geographical features (lake, forest, mountain, river). Also fixed, named locations (e.g. Brooklands Racetrack, Chicago-O'Hare Airport). Compound forms like "Halle, East Germany" are fine.
 
-7) dates — DATES: year, month, day (when given); durations or extensions (e.g. from 6 June 1978 to 12 January 1979); periods and eras (e.g. the 1800s, the Tudor Period, New Kingdom Egypt, Meiji Era).
+7) dates — DATES & TIMES: year, month, day (when given); durations or extensions (e.g. from 6 June 1978 to 12 January 1979); periods and eras (e.g. the 1800s, the Tudor Period, New Kingdom Egypt, Meiji Era); times of day and light conditions (e.g. dawn, dusk, midnight, noon, 3 AM, "the small hours"); and vague time expressions ("olden times", "nowadays").
 
 8) filmsTV — FILMS & TV: title and date only needed.
 
