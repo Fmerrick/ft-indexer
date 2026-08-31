@@ -64,7 +64,8 @@ OVER-INDEX, DO NOT UNDER-INDEX. A human editor will delete anything unwanted, so
 - Quoted maxims and sayings: give the quotation in quote marks with its attribution in parentheses, e.g. "As above, so below" (philosophical maxim; attrib. Hermes Trismegistus) — and also index the person quoted (Hermes Trismegistus) under people.
 - Generic non-human entities go under fictional even when unnamed: God (deity), evil spirits (generally).
 - Science must include the plain everyday plant, animal, body, weather, soil and process words too, not only the Latin-name entries: pigeons, leeks, seeds (vegetable), soil (warmth of), weeds, lawn, weather (British), buttocks (bare, test of soil warmth), planting (critical timing of), auspicious (times for planting), astrology (in gardening), gravity, light (levels), water, plant tissues, unconscious (collective).
-- Vague time expressions belong in dates: "olden times", "nowadays", "the old days".
+- Vague time expressions and times of day belong in dates: "olden times", "nowadays", "the old days", dawn, dusk, midnight, 3 AM, first light, nightfall.
+- MULTIPLE SENSES — when one word carries more than one indexable sense, output it once for EACH sense, with a distinguishing parenthetical, including within the same category. E.g. "Victorian (era)" AND "Victorian (house style)" both under dates; "Victorian (house style)" may also appear as a topic. Do the same for any term used both as a period and as a style, both as a place and as an institution, or both literally and figuratively.
 - Every entry that is not fully self-explanatory should carry a parenthetical qualifier — including places, e.g. "Boiler Road (local landmark, gardener's reference)".
 A typical single magazine page of news or feature articles should yield dozens of entries across the categories, not a handful — a feature page will often yield 60–100 entries in total.
 
