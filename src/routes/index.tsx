@@ -600,11 +600,6 @@ function CategoryCard({
                   styles.dot,
                 )}
               />
-              {item.page ? (
-                <span className="shrink-0 rounded bg-background/70 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
-                  {formatPageRef(item.page)}
-                </span>
-              ) : null}
 
               <input
                 value={item.text}

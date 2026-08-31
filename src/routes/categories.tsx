@@ -60,7 +60,7 @@ const CATEGORY_GUIDE: Array<{
   {
     label: "3. Names of Organisations and Vessels",
     rule:
-      "Professions and professional organisations; religions & sects; societies & institutions; philosophical, political or religious movements; companies & brand names; named vessels, spacecraft and submersibles (manned or unmanned).",
+      "Occupations of every kind — trades, jobs and roles, not only recognised professions (e.g. cleaner, drover, night watchman, farmhand) — and occupational organisations; religions & sects; societies & institutions; philosophical, political or religious movements; companies & brand names; named vessels, spacecraft and submersibles (manned or unmanned).",
     examples: [
       "Society for Psychical Research",
       "Roman Catholic Church",
