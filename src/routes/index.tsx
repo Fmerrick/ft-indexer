@@ -308,6 +308,8 @@ function IndexerPage() {
             const dropped = e.dataTransfer.files?.[0];
             if (dropped && dropped.type === "application/pdf") {
               setFile(dropped);
+              const base = dropped.name.replace(/\.pdf$/i, "");
+              setPageLabel(`${base} Indexed`);
             } else if (dropped) {
               toast.error("Please drop a PDF file");
             }
@@ -328,14 +330,21 @@ function IndexerPage() {
                     type="file"
                     accept="application/pdf"
                     className="hidden"
-                    onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+                    onChange={(e) => {
+                      const f = e.target.files?.[0] ?? null;
+                      setFile(f);
+                      if (f) {
+                        const base = f.name.replace(/\.pdf$/i, "");
+                        setPageLabel(`${base} Indexed`);
+                      }
+                    }}
                   />
                 </label>
               </div>
             </div>
             <div className="sm:w-56">
               <label className="text-sm font-medium mb-2 block">
-                Issue label (for output)
+                Output Label
               </label>
               <Input
                 placeholder="e.g. FT76p06"
