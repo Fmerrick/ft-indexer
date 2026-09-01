@@ -73,7 +73,15 @@ BOOK/FILM REVIEW PAGES ARE THE EXCEPTION — on a page that is a review (or a pa
 
 REGULAR REVIEW COLUMNS — some regular FT columns review or survey media and mention MANY titles, often only in passing: "The Reverend's Review" (films), its earlier name "Flicks that Church Forgot" (films), "Television" (TV shows), "The Haunted Generation" (sound recordings and books), and any similar review-oriented column. For these columns, list EVERY film, TV programme, sound recording or book mentioned in the column under reviews — even titles mentioned only in passing, in a list, or as a comparison. Give each with its date or author/artist when given. Do not skip any title.
 
-SEE REFERRALS — never output a bare reference like "see FT378:4-5". Always prefix it with a short description of what is being referenced, in the form: "for more on <subject> see FT378:4-5" (e.g. "for more on apotropaic marks see FT378:4-5", "for more on cult captives see FT386:4, 389:16-17"). Take the subject from the surrounding text.
+SEE REFERRALS — never output a bare reference like "see FT378:4-5". List them with the subject as the headword and the referral in parentheses, in the form: "<subject> (for more on, see FT386:20-21)" (e.g. "resurrections (for more on, see FT386:20-21)", "apotropaic marks (for more on, see FT378:4-5)"). Take the subject from the surrounding text.
+
+HEADWORD FIRST — for every entry, lead with the single most important word (the sortable headword) and push the less important words into the parenthetical context. Examples: "bin (for clothing donations, woman trapped inside)" NOT "clothing donation bin (woman trapped inside)"; "resurrection (attempted by prayer power)" NOT "prayer power (attempts to resurrect deceased)"; "brain storage (human, by cryonics)" NOT "human brain storage (low-temperature cryonics)"; "Christianity (religious doctrine)" NOT "Christian Church (religious doctrine)"; "GoFundMe (internet crowdfunding platform)" NOT "GoFundMe (crowdfunding platform)" when more context helps. This applies across ALL categories.
+
+NEWS SOURCE CITATIONS ARE NOT INDEXABLE — when a news item is credited to a source (e.g. "BBC News, 6 Jan 2020", "Daily Mail", "Newsweek", "Independent"), do NOT index the source organisation and do NOT index the publication date of the report. Dates labelled only as "date of news report" must be omitted entirely. Only index dates when something actually happened (deaths, incidents, funerals, broadcasts).
+
+FILMS & TV DUAL LISTING — a film or TV programme that is REVIEWED must appear in BOTH the filmsTV and reviews categories. In filmsTV, add a note of the issue and page of the review: "Hagazussa: A Heathen's Curse (2019, Reviewed in FT392:67)". In reviews, give title and author/director as usual.
+
+MAXIMIZE INDEXING — try to index everything that could possibly fall into the categories. When in doubt, include it; the human editor deletes, so a miss is worse than an extra entry.
 
 PARENTHETICAL CONTEXT — add a short qualifier in parentheses to as many entries as possible so a reader knows what the entry refers to. Keep it to a few words, never a sentence. Examples:
 - Dates: "1505 (date carved in Creswell cave)", "2019 (visit to Creswell cave)", "40-28,000 yrs ago (British cave art)", "Dusk (time of cult arrival)".
